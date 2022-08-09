@@ -1,0 +1,64 @@
+# https://taskfile.dev/usage/
+
+version: '3'
+
+# dotenv: ['.env', '{{.ENV}}/.env.', '{{.HOME}}/.env']
+
+env: 
+  GREETING: Hey, there!
+
+includes:
+  infra: launchpad-core/taskfiles/infra.yml
+  cluster: launchpad-core/taskfiles/cluster.yml
+  indexer: launchpad-core/taskfiles/indexer.yml
+  # vars:
+  #   DOCKER_IMAGE: frontend_image
+
+tasks:
+  task_template:
+    interactive: true # for interactive scripts
+    desc: short form description of task
+    deps: []
+    summary: |
+      long form description of task
+
+      *this* area supports _markdown_
+    preconditions: [] # run commands to check 
+    cmds:
+      - |
+        set - {{ .CLI_ARGS }}
+        ONE=$1; shift
+        TWO=$1; shift
+
+        usage(){
+          echo "Invalid usage. Specify arguments: <one> <two>"
+          echo "<one> explanation of one"
+          echo "<two> explanation of two"
+          exit 1
+        }
+
+        if [ -z "$TWO" ]; then
+          usage
+        fi
+
+        set -x
+        # do real stuff
+        echo "$ONE $TWO"
+      - command2
+      - command3
+
+  default:
+    cmds: # TODO some kind of help output
+    - task --list-all
+  hello:
+    cmds:
+      - echo "$GREETING from Task!"
+
+
+
+# operational tasks
+# viewing logs
+# accessing cli container
+# accessing grafana + other remote services
+# cleaning subgraph data
+# analyse indices
