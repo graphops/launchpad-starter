@@ -1,0 +1,20 @@
+# example of inventory for single node setup
+all:
+  hosts: &all
+    control-plane-0:
+      ansible_host: <ip>
+      ansible_ssh_port: 22
+      ansible_user: root
+      hardened_ssh_port: <pick_a_port>
+      main_user: <username>
+      become: true
+      k0s_version: v1.24.2+k0s.0
+      k0s_binary_dest: /usr/local/bin/k0s
+      extra_args: "--enable-worker"
+
+k0s:
+  children:
+    initial_controller:
+      hosts:
+        control-plane-0:
+  hosts: *all
