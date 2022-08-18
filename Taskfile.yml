@@ -9,12 +9,13 @@ env:
 
 vars:
   # INVENTORY_PATH: "~/infra/ansible/hosts/inventory.yaml"
-  INVENTORY_PATH: "./inventory/inventory.yaml"
+  # INVENTORY_PATH: "./inventory/inventory.yaml"
 
 includes:
   hosts: launchpad-core/taskfiles/hosts.yml
   k0s: launchpad-core/taskfiles/k0s.yml
   indexer: launchpad-core/taskfiles/indexer.yml
+  releases: launchpad-core/taskfiles/releases.yml
   # vars:
   #   DOCKER_IMAGE: frontend_image
 

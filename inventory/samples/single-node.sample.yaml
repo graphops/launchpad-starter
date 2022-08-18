@@ -10,7 +10,7 @@ all:
       become: true
       k0s_version: v1.24.2+k0s.0
       k0s_binary_dest: /usr/local/bin/k0s
-      extra_args: "--enable-worker"
+      extra_args: "--enable-worker --no-taints"
 
 k0s:
   children:
