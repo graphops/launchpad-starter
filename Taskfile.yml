@@ -7,9 +7,12 @@ version: '3'
 env: 
   GREETING: Hey, there!
 
+vars:
+  INVENTORY_PATH: "~/infra/ansible/hosts/inventory.yaml"
+
 includes:
-  infra: launchpad-core/taskfiles/infra.yml
-  cluster: launchpad-core/taskfiles/cluster.yml
+  hosts: launchpad-core/taskfiles/hosts.yml
+  k0s: launchpad-core/taskfiles/k0s.yml
   indexer: launchpad-core/taskfiles/indexer.yml
   # vars:
   #   DOCKER_IMAGE: frontend_image
