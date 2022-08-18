@@ -9,6 +9,7 @@ env:
 
 vars:
   INVENTORY_PATH: "~/infra/ansible/hosts/inventory.yaml"
+  # INVENTORY_PATH: "./inventory/inventory.yaml"
 
 includes:
   hosts: launchpad-core/taskfiles/hosts.yml
