@@ -1,0 +1,79 @@
+# example of multi-nodes HA k8s inventory
+
+
+x-templates:
+  node-defaults: &node-defaults
+    ansible_ssh_port: 22
+    ansible_user: root
+    hardened_ssh_port: <pick_a_port> &hardened-ssh-port
+    main_user: <username>
+    become: true
+    lb_address: <add_lb_address>
+    k0s_version: v1.24.2+k0s.0
+    k0s_use_custom_config: true
+    k0s_binary_dest: /usr/local/bin/k0s
+  k0s-defaults: &k0s_defaults
+    ansible_ssh_port: *hardened-ssh-port
+
+all:
+  hosts: &all
+    worker_0:
+      ansible_host: <ip>
+      <<: *node-defaults
+    worker_1:
+      ansible_host: <ip>
+      <<: *node-defaults
+    worker_2:
+      ansible_host: <ip>
+      <<: *node-defaults
+    control-plane-0:
+      ansible_host: <ip>
+      <<: *node-defaults
+    control-plane-1:
+      ansible_host: <ip>
+      <<: *node-defaults
+    control-plane-2:
+      ansible_host: <ip>
+      <<: *node-defaults
+
+k0s:
+  children:
+    initial_controller:
+      hosts:
+        control-plane-0:
+    controller:
+      hosts:   
+        control-plane-1:
+        control-plane-2:
+    worker:
+      hosts:
+        worker_0:
+        worker_1:
+        worker_2:
+  hosts: *all
+
+
+
+
+---
+# example of inventory for single node setup
+all:
+  hosts: &all
+    control-plane-0:
+      ansible_host: <ip>
+      ansible_ssh_port: 22
+      ansible_user: root
+      hardened_ssh_port: <pick_a_port>
+      main_user: <username>
+      become: true
+      lb_address: <add_lb_address>
+      k0s_version: v1.24.2+k0s.0
+      k0s_binary_dest: /usr/local/bin/k0s
+      extra_args: "--enable-worker"
+
+k0s:
+  children:
+    initial_controller:
+      hosts:
+        control-plane-0:
+  hosts: *all
