@@ -1,0 +1,42 @@
+repositories:
+  - name: grafana
+    url: https://grafana.github.io/helm-charts
+  - name: prometheus
+    url: https://prometheus-community.github.io/helm-charts
+  - name: graphops
+    url: https://graphops.github.io/helm-charts
+
+releases:
+  - name: promtail
+    namespace: &namespace "monitoring"
+    chart: grafana/promtail
+    version: 6.2.3
+    labels:
+      component: promtail
+
+  - name: grafana
+    namespace: *namespace
+    chart: grafana/grafana
+    version: 6.32.14
+    labels:
+      component: grafana
+
+  - name: prometheus
+    namespace: *namespace
+    chart: prometheus/prometheus
+    version: 15.12.0
+    labels:
+      component: prometheus
+  
+  - name: loki-secret
+    namespace: *namespace
+    chart: graphops/resource-injector
+    version: 0.1.0
+
+  - name: loki
+    namespace: *namespace
+    chart: grafana/loki-distributed
+    version: 0.55.4 
+    labels:
+      component: loki
+  # Using needs creates a dependency tree so that this release waits for `sealed-secrets` release

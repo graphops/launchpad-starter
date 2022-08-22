@@ -1,0 +1,2 @@
+bases:
+  - ../../launchpad-core/helmfiles/_base.yaml
