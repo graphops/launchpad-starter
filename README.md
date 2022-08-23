@@ -16,6 +16,7 @@
 - kubeseal
 - ssh
 - octant
+- helm-git
 
 
 ## Todo
