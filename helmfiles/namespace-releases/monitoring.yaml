@@ -1,8 +1,36 @@
 # Import YAML template definitions from launchpad-core
 {{ readFile "../../launchpad-core/helmfiles/templates/monitoring.yaml" }}
 
-# Override the root YAML object with the default configuration from core
-<<: *template-default-monitoring-releases
+releases:
+  - name: promtail
+    <<: *launchpad-release-template-promtail
+    missingFileHandler: Warn
+    values:
+      - &release-values-override ../release-values/{{`{{ .Release.Namespace }}`}}/{{`{{ .Release.Name }}`}}.yaml
+
+  - name: grafana
+    <<: *launchpad-release-template-grafana
+    missingFileHandler: Warn
+    values:
+      - &release-values-override ../release-values/{{`{{ .Release.Namespace }}`}}/{{`{{ .Release.Name }}`}}.yaml
+  
+  - name: prometheus
+    <<: *launchpad-release-template-prometheus
+    missingFileHandler: Warn
+    values:
+      - &release-values-override ../release-values/{{`{{ .Release.Namespace }}`}}/{{`{{ .Release.Name }}`}}.yaml
+    
+  - name: loki-secret
+    <<: *launchpad-release-template-loki-secret
+    missingFileHandler: Warn
+    values:
+      - &release-values-override ../release-values/{{`{{ .Release.Namespace }}`}}/{{`{{ .Release.Name }}`}}.yaml
+  
+  - name: loki
+    <<: *launchpad-release-template-loki
+    missingFileHandler: Warn
+    values:
+      - &release-values-override ../release-values/{{`{{ .Release.Namespace }}`}}/{{`{{ .Release.Name }}`}}.yaml
 
 # For more advanced customisation of the releases in the namespace and their configuration
 # See https://docs.graphops.xyz/launchpad/defining-releases TODO TODO TODO
