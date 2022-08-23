@@ -1,8 +1,22 @@
-# Import YAML template definitions from launchpad-core
+# Import YAML template definitions
 {{ readFile "../../launchpad-core/helmfiles/templates/storage.yaml" }}
 
-# Override the root YAML object with the default configuration from core
-<<: *template-default-storage-releases
+releases:
+  - name: openebs
+    <<: *launchpad-release-template-openebs
+    missingFileHandler: Warn
+    values:
+      - &release-values-override ../release-values/{{`{{ .Release.Namespace }}`}}/{{`{{ .Release.Name }}`}}.yaml
+  - name: openebs-rawfile-localpv
+    <<: *launchpad-release-template-openebs-rawfile-localpv
+    missingFileHandler: Warn
+    values:
+      - *release-values-override
+  - name: openebs-rawfile-storageclass
+    <<: *launchpad-release-template-openebs-rawfile-storageclass
+    missingFileHandler: Warn
+    values:
+      - *release-values-override
 
 # For more advanced customisation of the releases in the namespace and their configuration
 # See https://docs.graphops.xyz/launchpad/defining-releases TODO TODO TODO
