@@ -6,4 +6,4 @@ releases:
     <<: *launchpad-release-template-ingress-nginx
     missingFileHandler: Warn
     values:
-      - &release-values-override ../release-values/{{`{{ .Release.Namespace }}`}}/{{`{{ .Release.Name }}`}}.yaml
+      - ../release-values/{{`{{ .Release.Namespace }}`}}/{{`{{ .Release.Name }}`}}.yaml
