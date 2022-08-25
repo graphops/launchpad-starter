@@ -1,3 +1,6 @@
+bases:
+- _base.yaml
+
 # Import YAML template definitions
 {{ readFile "../../launchpad-core/helmfiles/templates/storage.yaml" }}
 

@@ -2,18 +2,19 @@
 {{ readFile "../../launchpad-core/helmfiles/templates/monitoring.yaml" }}
 
 releases:
+
+  - name: kube-prometheus-stack
+    <<: *launchpad-release-template-kube-prometheus-stack
+    values:
+      - ../release-values/{{`{{ .Release.Namespace }}`}}/{{`{{ .Release.Name }}`}}.yaml
+
+  - name: node-problem-detector
+    <<: *launchpad-release-template-node-problem-detector
+    values:
+      - ../release-values/{{`{{ .Release.Namespace }}`}}/{{`{{ .Release.Name }}`}}.yaml
+
   - name: promtail
     <<: *launchpad-release-template-promtail
-    values:
-      - ../release-values/{{`{{ .Release.Namespace }}`}}/{{`{{ .Release.Name }}`}}.yaml
-
-  - name: grafana
-    <<: *launchpad-release-template-grafana
-    values:
-      - ../release-values/{{`{{ .Release.Namespace }}`}}/{{`{{ .Release.Name }}`}}.yaml
-
-  - name: prometheus
-    <<: *launchpad-release-template-prometheus
     values:
       - ../release-values/{{`{{ .Release.Namespace }}`}}/{{`{{ .Release.Name }}`}}.yaml
 

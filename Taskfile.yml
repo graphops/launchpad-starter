@@ -2,10 +2,10 @@
 
 version: '3'
 
-# dotenv: ['.env', '{{.ENV}}/.env.', '{{.HOME}}/.env']
+dotenv: ['.env', '.env.sample'] # TODO REMOVE SAMPLE
 
-env: 
-  GREETING: Hey, there!
+# env: 
+#   GREETING: Hey, there!
 
 vars:
   # INVENTORY_PATH: "~/infra/ansible/hosts/inventory.yaml"
