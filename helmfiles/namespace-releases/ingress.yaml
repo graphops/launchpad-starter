@@ -4,6 +4,5 @@
 releases:
   - name: ingress-nginx
     <<: *launchpad-release-template-ingress-nginx
-    missingFileHandler: Warn
     values:
       - ../release-values/{{`{{ .Release.Namespace }}`}}/{{`{{ .Release.Name }}`}}.yaml

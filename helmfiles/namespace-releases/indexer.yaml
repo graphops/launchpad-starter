@@ -4,13 +4,11 @@
 releases:
   - name: postgresql-cr
     <<: *launchpad-release-template-postgresql-cr
-    missingFileHandler: Warn
     values:
       - ../release-values/{{`{{ .Release.Namespace }}`}}/{{`{{ .Release.Name }}`}}.yaml
 
   - name: graph-node
     <<: *launchpad-release-template-graph-node
-    missingFileHandler: Warn
     values:
       - ../release-values/{{`{{ .Release.Namespace }}`}}/{{`{{ .Release.Name }}`}}.yaml
 # For more advanced customisation of the releases in the namespace and their configuration

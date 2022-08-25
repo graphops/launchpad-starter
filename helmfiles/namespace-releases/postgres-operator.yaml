@@ -4,7 +4,6 @@
 releases:
   - name: postgres-operator
     <<: *launchpad-release-template-postgres-operator
-    missingFileHandler: Warn
     values:
       - ../release-values/{{`{{ .Release.Namespace }}`}}/{{`{{ .Release.Name }}`}}.yaml
 

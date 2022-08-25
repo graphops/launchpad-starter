@@ -4,17 +4,14 @@
 releases:
   - name: openebs
     <<: *launchpad-release-template-openebs
-    missingFileHandler: Warn
     values:
       - ../release-values/{{`{{ .Release.Namespace }}`}}/{{`{{ .Release.Name }}`}}.yaml
   - name: openebs-rawfile-localpv
     <<: *launchpad-release-template-openebs-rawfile-localpv
-    missingFileHandler: Warn
     values:
       - ../release-values/{{`{{ .Release.Namespace }}`}}/{{`{{ .Release.Name }}`}}.yaml
   - name: openebs-rawfile-storageclass
     <<: *launchpad-release-template-openebs-rawfile-storageclass
-    missingFileHandler: Warn
     values:
       - ../release-values/{{`{{ .Release.Namespace }}`}}/{{`{{ .Release.Name }}`}}.yaml
 

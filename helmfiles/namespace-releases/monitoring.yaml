@@ -4,31 +4,26 @@
 releases:
   - name: promtail
     <<: *launchpad-release-template-promtail
-    missingFileHandler: Warn
     values:
       - ../release-values/{{`{{ .Release.Namespace }}`}}/{{`{{ .Release.Name }}`}}.yaml
 
   - name: grafana
     <<: *launchpad-release-template-grafana
-    missingFileHandler: Warn
     values:
       - ../release-values/{{`{{ .Release.Namespace }}`}}/{{`{{ .Release.Name }}`}}.yaml
 
   - name: prometheus
     <<: *launchpad-release-template-prometheus
-    missingFileHandler: Warn
     values:
       - ../release-values/{{`{{ .Release.Namespace }}`}}/{{`{{ .Release.Name }}`}}.yaml
-    
+
   - name: loki-secret
     <<: *launchpad-release-template-loki-secret
-    missingFileHandler: Warn
     values:
       - ../release-values/{{`{{ .Release.Namespace }}`}}/{{`{{ .Release.Name }}`}}.yaml
-  
+
   - name: loki
     <<: *launchpad-release-template-loki
-    missingFileHandler: Warn
     values:
       - ../release-values/{{`{{ .Release.Namespace }}`}}/{{`{{ .Release.Name }}`}}.yaml
 

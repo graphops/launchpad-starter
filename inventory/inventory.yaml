@@ -9,17 +9,17 @@ all:
     extra_args: "--enable-worker --no-taints"
     ansible_user: roger # root
     hardened_ssh_port: 987
-    ansible_ssh_port: 987
     main_user: roger
+
+init_group:
+  hosts: *all-hosts
+  vars:
+    ansible_ssh_port: 22
+
+k0s:
   children:
-    init_group:
-      hosts: *all-hosts
-      vars:
-        ansible_ssh_port: 22
-    k0s:
-      children:
-        initial_controller:
-          hosts:
-            control-plane-0:
-      vars:
-        ansible_ssh_port: 987
+    initial_controller:
+      hosts:
+        control-plane-0:
+  vars:
+    ansible_ssh_port: 987
