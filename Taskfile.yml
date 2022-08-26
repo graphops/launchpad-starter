@@ -12,54 +12,39 @@ vars:
   # INVENTORY_PATH: "./inventory/inventory.yaml"
 
 includes:
-  hosts: launchpad-core/taskfiles/hosts.yml
-  releases: launchpad-core/taskfiles/releases.yml
-  indexer: launchpad-core/taskfiles/indexer.yml
+  ext:
+    taskfile: Taskfile.ext.yaml
+    optional: true
+  hosts:
+    taskfile: launchpad-core/taskfiles/hosts.yml
+    optional: true
+  releases:
+    taskfile: launchpad-core/taskfiles/releases.yml
+    optional: true
+  indexer:
+    taskfile: launchpad-core/taskfiles/indexer.yml
+    optional: true
   # vars:
   #   DOCKER_IMAGE: frontend_image
 
 tasks:
-  task_template:
-    interactive: true # for interactive scripts
-    desc: short form description of task
-    deps: []
-    summary: |
-      long form description of task
-
-      *this* area supports _markdown_
-    preconditions: [] # run commands to check 
+  launchpad:pull-starter-upstream:
     cmds:
-      - |
-        set - {{ .CLI_ARGS }}
-        ONE=$1; shift
-        TWO=$1; shift
-
-        usage(){
-          echo "Invalid usage. Specify arguments: <one> <two>"
-          echo "<one> explanation of one"
-          echo "<two> explanation of two"
-          exit 1
-        }
-
-        if [ -z "$TWO" ]; then
-          usage
-        fi
-
-        set -x
-        # do real stuff
-        echo "$ONE $TWO"
-      - command2
-      - command3
-
+    - echo hello # submodule magic
+  launchpad:update-core:
+    cmds:
+    - echo hello # submodule magic
   default:
     cmds: # TODO some kind of help output
     - task --list-all
-  hello:
+
+  octant:
     cmds:
-      - echo "$GREETING from Task!"
+    - octant
 
-
-
+  k9s:
+    cmds:
+    - k9s
 # operational tasks
 # viewing logs
 # accessing cli container

@@ -9,12 +9,20 @@ releases:
     <<: *launchpad-release-template-openebs
     values:
       - ../release-values/{{`{{ .Release.Namespace }}`}}/{{`{{ .Release.Name }}`}}.yaml
-  - name: openebs-rawfile-localpv
-    <<: *launchpad-release-template-openebs-rawfile-localpv
+  # - name: openebs-rawfile-localpv
+  #   <<: *launchpad-release-template-openebs-rawfile-localpv
+  #   values:
+  #     - ../release-values/{{`{{ .Release.Namespace }}`}}/{{`{{ .Release.Name }}`}}.yaml
+  # - name: openebs-rawfile-storageclass
+  #   <<: *launchpad-release-template-openebs-rawfile-storageclass
+  #   values:
+  #     - ../release-values/{{`{{ .Release.Namespace }}`}}/{{`{{ .Release.Name }}`}}.yaml
+  - name: openebs-zfs-localpv
+    <<: *launchpad-release-template-openebs-zfs-localpv
     values:
       - ../release-values/{{`{{ .Release.Namespace }}`}}/{{`{{ .Release.Name }}`}}.yaml
-  - name: openebs-rawfile-storageclass
-    <<: *launchpad-release-template-openebs-rawfile-storageclass
+  - name: openebs-zfs-storageclass
+    <<: *launchpad-release-template-openebs-zfs-storageclass
     values:
       - ../release-values/{{`{{ .Release.Namespace }}`}}/{{`{{ .Release.Name }}`}}.yaml
 

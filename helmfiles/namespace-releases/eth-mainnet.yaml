@@ -1,0 +1,15 @@
+# Import YAML template definitions
+{{ readFile "../../launchpad-core/helmfiles/templates/eth-mainnet.yaml" }}
+
+releases:
+  - name: erigon-pruned-fullnode-eth-mainnet
+    <<: *launchpad-release-template-erigon-eth-mainnet
+    values:
+      - ../release-values/{{`{{ .Release.Namespace }}`}}/{{`{{ .Release.Name }}`}}.yaml
+
+  # - name: graph-node
+  #   <<: *launchpad-release-template-graph-node
+  #   values:
+  #     - ../release-values/{{`{{ .Release.Namespace }}`}}/{{`{{ .Release.Name }}`}}.yaml
+# For more advanced customisation of the releases in the namespace and their configuration
+# See https://docs.graphops.xyz/launchpad/defining-releases TODO TODO TODO
