@@ -1,2 +1,3 @@
 helmDefaults:
   kubeContext: {{ requiredEnv "KUBECONTEXT" }}
+  recreatePods: true
