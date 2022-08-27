@@ -1,3 +1,6 @@
+image:
+  tag: devel
+
 statefulNode:
   # -- Additional CLI arguments to pass to `erigon`
   extraArgs:
@@ -14,6 +17,6 @@ statefulNode:
         # -- The amount of disk space to provision for Erigon
         storage: 800Gi
 
-rpcdaemons:
+rpcdaemon:
   # -- Enable a Deployment of rpcdaemons that can be scaled independently
   enabled: false
