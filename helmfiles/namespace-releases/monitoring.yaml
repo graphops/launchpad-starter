@@ -2,14 +2,13 @@
 {{ readFile "../../launchpad-core/helmfiles/templates/monitoring.yaml" }}
 
 releases:
-
   - name: kube-prometheus-stack
     <<: *launchpad-release-template-kube-prometheus-stack
     values:
       - ../release-values/{{`{{ .Release.Namespace }}`}}/{{`{{ .Release.Name }}`}}.yaml
 
-  - name: node-problem-detector
-    <<: *launchpad-release-template-node-problem-detector
+  - name: loki
+    <<: *launchpad-release-template-loki
     values:
       - ../release-values/{{`{{ .Release.Namespace }}`}}/{{`{{ .Release.Name }}`}}.yaml
 
@@ -18,15 +17,11 @@ releases:
     values:
       - ../release-values/{{`{{ .Release.Namespace }}`}}/{{`{{ .Release.Name }}`}}.yaml
 
-  - name: loki-secret
-    <<: *launchpad-release-template-loki-secret
+  - name: node-problem-detector
+    <<: *launchpad-release-template-node-problem-detector
     values:
       - ../release-values/{{`{{ .Release.Namespace }}`}}/{{`{{ .Release.Name }}`}}.yaml
 
-  - name: loki
-    <<: *launchpad-release-template-loki
-    values:
-      - ../release-values/{{`{{ .Release.Namespace }}`}}/{{`{{ .Release.Name }}`}}.yaml
 
 # For more advanced customisation of the releases in the namespace and their configuration
 # See https://docs.graphops.xyz/launchpad/defining-releases TODO TODO TODO
