@@ -28,7 +28,9 @@ includes:
 
 # Root Task definitions
 tasks:
+  # Default task will list all available tasks
   default:
+    desc: List all available tasks
     silent: true
     cmds:
     - task launchpad:version
@@ -38,6 +40,7 @@ tasks:
     - task --list-all
 
   help:
+    desc: "Display help for a task. Usage: help -- <task name>"
     silent: true
     cmds:
       - |
