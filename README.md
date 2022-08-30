@@ -92,6 +92,28 @@ task releases:apply -- eth-mainnet
 task releases:apply -- indexer
 ```
 
+## Updates
+
+### Updating `launchpad-core`
+
+As new versions of key components in the stack are released, we will update `launchpad-core`'s templated definitions. You can easily inherit these updates by pulling down the latest submodule.
+
+Launchpad comes with a built in task to do this:
+
+```shell
+task launchpad:update-core
+```
+
+### Pulling in starter changes
+
+From time to time, you may want to update your infra repo with the latest changes from our starter. 
+
+Launchpad comes with a built in task to do this:
+
+```shell
+task launchpad:pull-upstream-starter
+```
+
 ## Contributing
 
 We welcome and appreciate your contributions! Please see the [Contributor Guide](/CONTRIBUTING.md), [Code Of Conduct](/CODE_OF_CONDUCT.md) and [Security Notes](/SECURITY.md) for this repository.
