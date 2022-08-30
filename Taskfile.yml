@@ -63,9 +63,10 @@ tasks:
   launchpad:update-core:
     desc: Update the launchpad-core submodule to the latest version
     cmds:
-    - task launchpad:version
-    # - git submodule add https://github.com/graphops/launchpad-core launchpad-core
-    - git submodule update --init --recursive
+    - git submodule status
+    - git submodule add https://github.com/graphops/launchpad-core launchpad-core || true && echo "OK"
+    - git submodule update --init --recursive --remote --depth=1
+    - git submodule status
 
   octant:
     desc: Run octant to navigate your cluster in your web browser
