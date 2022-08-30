@@ -7,7 +7,7 @@
 version: '3'
 
 # For all Tasks, source in these environment variables
-dotenv: ['.env', '.env.sample'] # TODO REMOVE SAMPLE
+dotenv: ['.env']
 
 # Import Taskfiles from launchpad-core
 includes:

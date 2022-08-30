@@ -1,7 +1,9 @@
-# example of inventory for single node setup
+# Example of an inventory for single host that will be configured
+# as both the Kubernetes master and as a Kubernetes worker node
+
 all:
   hosts: &all
-    control-plane-0:
+    my-first-host: # you can customise the name of your host
       ansible_host: <ip>
       ansible_ssh_port: 22
       ansible_user: root
