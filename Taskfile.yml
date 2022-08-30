@@ -1,6 +1,7 @@
 ## NB: Probably don't edit me
 ## To make pulling upstream launchpad-starter changes seamless, it's recommended
-## to add custom Tasks to Taskfile.ext.yaml to prevent merge conflicts
+## to add custom Tasks to a Taskfile.ext.yaml to prevent merge conflicts
+## Any tasks you add to Taskfile.ext.yaml will be available under the ext group
 
 # https://taskfile.dev/usage/
 version: '3'
