@@ -40,7 +40,7 @@ tasks:
     - task launchpad:version
     - git remote add starter-upstream https://github.com/graphops/launchpad-starter || true
     - |
-      [[ `git status --porcelain --untracked-files=no` ]] && echo "You have uncommitted changes! Exiting..." && exit 1
+      if [[ `git status --porcelain --untracked-files=no` ]]; then echo "You have uncommitted changes! Exiting..." && exit 1; fi
     - git status
     - gum confirm "Are you sure you want to pull starter-upstream/main into the current branch?"
     - git pull starter-upstream main --recurse-submodules --squash
