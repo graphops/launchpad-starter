@@ -1,3 +1,4 @@
+# Import base configuration
 bases:
 - _base.yaml
 

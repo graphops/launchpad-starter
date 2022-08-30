@@ -1,3 +1,7 @@
+# Import base configuration
+bases:
+- _base.yaml
+
 # Import YAML template definitions from launchpad-core
 {{ readFile "../../launchpad-core/helmfiles/templates/monitoring.yaml" }}
 

@@ -1,6 +1,6 @@
 all:
   hosts: &all-hosts
-    control-plane-0:
+    roger:
       ansible_host: 10.0.0.104
   vars:
     become: true
@@ -20,6 +20,6 @@ k0s:
   children:
     initial_controller:
       hosts:
-        control-plane-0:
+        roger:
   vars:
     ansible_ssh_port: 987

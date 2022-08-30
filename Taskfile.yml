@@ -1,16 +1,14 @@
-# https://taskfile.dev/usage/
+## NB: Probably don't edit me
+## To make pulling upstream launchpad-starter changes seamless, it's recommended
+## to add custom Tasks to Taskfile.ext.yaml to prevent merge conflicts
 
+# https://taskfile.dev/usage/
 version: '3'
 
+# For all Tasks, source in these environment variables
 dotenv: ['.env', '.env.sample'] # TODO REMOVE SAMPLE
 
-# env: 
-#   GREETING: Hey, there!
-
-vars:
-  # INVENTORY_PATH: "~/infra/ansible/hosts/inventory.yaml"
-  # INVENTORY_PATH: "./inventory/inventory.yaml"
-
+# Import Taskfiles from launchpad-core
 includes:
   ext:
     taskfile: Taskfile.ext.yaml
@@ -24,19 +22,32 @@ includes:
   indexer:
     taskfile: launchpad-core/taskfiles/indexer.yml
     optional: true
-  # vars:
-  #   DOCKER_IMAGE: frontend_image
+  launchpad:
+    taskfile: launchpad-core/taskfiles/launchpad.yml
+    optional: true
 
+# Root Task definitions
 tasks:
+  default:
+    silent: true
+    cmds:
+    - task launchpad:version
+    - echo "Available commands:"
+    - task --list-all
+
   launchpad:pull-starter-upstream:
     cmds:
-    - echo hello # submodule magic
+    - task launchpad:version
+    - git remote add starter-upstream https://github.com/graphops/launchpad-starter || true
+    - |
+      [[ `git status --porcelain --untracked-files=no` ]] && echo "You have uncommitted changes! Exiting..." && exit 1
+    - git status
+    - gum confirm "Are you sure you want to pull starter-upstream/main into the current branch?"
+    - git pull starter-upstream main --recurse-submodules --squash
+
   launchpad:update-core:
     cmds:
     - echo hello # submodule magic
-  default:
-    cmds: # TODO some kind of help output
-    - task --list-all
 
   octant:
     cmds:
