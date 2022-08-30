@@ -15,5 +15,3 @@ releases:
     <<: *launchpad-release-template-graph-node
     values:
       - ../release-values/{{`{{ .Release.Namespace }}`}}/{{`{{ .Release.Name }}`}}.yaml
-# For more advanced customisation of the releases in the namespace and their configuration
-# See https://docs.graphops.xyz/launchpad/defining-releases TODO TODO TODO

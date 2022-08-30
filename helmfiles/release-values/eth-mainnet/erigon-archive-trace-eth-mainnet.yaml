@@ -1,22 +1,12 @@
-image:
-  tag: devel
-
 statefulNode:
   # -- Additional CLI arguments to pass to `erigon`
-  extraArgs:
-  - --torrent.download.rate=60mb # Download snapshot files faster
-  - --torrent.upload.rate=20mb # Support other nodes with more UL
-  - --prune=hct
+  extraArgs: []
 
   # -- [PersistentVolumeClaimSpec](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.23/#persistentvolumeclaimspec-v1-core) for Erigon storage
   volumeClaimSpec:
     # -- The storage class to use when provisioning a persistent volume for Erigon
-    storageClassName: openebs-zfs-localpv-compressed-64k
+    storageClassName: openebs-hostpath # change me if desired
     resources:
       requests:
         # -- The amount of disk space to provision for Erigon
-        storage: 800Gi
-
-rpcdaemon:
-  # -- Enable a Deployment of rpcdaemons that can be scaled independently
-  enabled: false
+        storage: 2Ti

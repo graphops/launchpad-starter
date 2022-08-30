@@ -6,7 +6,7 @@ bases:
 {{ readFile "../../launchpad-core/helmfiles/templates/eth-mainnet.yaml" }}
 
 releases:
-  - name: erigon-pruned-fullnode-eth-mainnet
+  - name: erigon-archive-trace-eth-mainnet
     <<: *launchpad-release-template-erigon-eth-mainnet
     values:
       - ../release-values/{{`{{ .Release.Namespace }}`}}/{{`{{ .Release.Name }}`}}.yaml
@@ -15,6 +15,3 @@ releases:
     <<: *launchpad-release-template-proxyd-eth-mainnet
     values:
       - ../release-values/{{`{{ .Release.Namespace }}`}}/{{`{{ .Release.Name }}`}}.yaml
-
-# For more advanced customisation of the releases in the namespace and their configuration
-# See https://docs.graphops.xyz/launchpad/defining-releases TODO TODO TODO

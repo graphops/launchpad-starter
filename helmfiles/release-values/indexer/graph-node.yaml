@@ -1,14 +1,11 @@
 # Release values overrides for graph-node
-toolbox:
-  enabled: false
-
 graphNodeDefaults:
   env:
     PGHOST: pg-graph-node
     PGPORT: 5432
     PGDATABASE: graph
-    ETH_MAINNET_RPC_URL:
-    GRAPH_POI_ACCESS_TOKEN: SOMETHING_RANDOM
+    ETH_MAINNET_RPC_URL: CHANGE_ME
+    GRAPH_POI_ACCESS_TOKEN: CHANGE_ME_TO_SOMETHING_RANDOM
 
   secretEnv:
     PGUSER:

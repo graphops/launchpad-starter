@@ -1,0 +1,6 @@
+# If you are going to use the localprovisioner openebs-hostpath StorageClass,
+# set enabled to true and specify the path on the host where persistent volume
+# data should be saved
+localprovisioner:
+  enabled: false
+  basePath: /storage/openebs/local
