@@ -18,7 +18,7 @@ There are two components to be aware of:
 - A predefined set of tasks to deploy and manage Kubernetes onto any set of SSH-capable hosts you have
 - A predefined set of release definitions for key components in the stack, including cluster services like monitoring and logging, as well as the Indexer stack
 
-## Quickstart
+## Quickstart
 
 ### 1. Install Taskfile
 
