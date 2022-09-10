@@ -14,17 +14,6 @@ init_group:
     ansible_user: root
     hardened_ssh_port: <pick_a_port>
     main_user: <username>
-    zfs_create_pools: true
-    zfs_pools:  #defines zpool(s) to manage
-    - name: zpool
-      atime: 'off'
-      compression: 'lz4'  # on | off (default) | lzjb | gzip | gzip-1 | gzip-2 | gzip-3 | gzip-4 | gzip-5 | gzip-6 | gzip-7 | gzip-8 | gzip-9 | lz4 | zle
-      devices:  #define devices to create pool with...can define multiple by | sdb sdc sdd sde sdf | all on one line w/spaces
-        - '<name_of_device>'
-        - '<name_of_device>'
-      type: raidz  #define pool type... | basic (no-raid) | mirror | raidz | raidz2 | raidz3
-      state: present
-      action: create
 
 
 k0s:
