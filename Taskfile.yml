@@ -57,8 +57,8 @@ tasks:
   launchpad:setup:
     desc: Setup launchpad-core and install launchpad dependencies after a fresh clone
     cmds:
-    - task: launchpad:update-core # provides launchpad:deps
-    - task: launchpad:deps
+    - task launchpad:update-core # provides launchpad:deps
+    - task launchpad:deps
 
   launchpad:update-core: # deps may not be installed, so only use git and bash
     desc: Update the launchpad-core submodule to the latest version
