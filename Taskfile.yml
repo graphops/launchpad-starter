@@ -62,7 +62,7 @@ tasks:
       if [[ `git status --porcelain --untracked-files=no` ]]; then echo "You have uncommitted changes! Exiting..." && exit 1; fi
     - git status
     - gum confirm "Are you sure you want to pull the main branch of launchpad-starter into the current branch?"
-    - git pull upstream-starter main --recurse-submodules --squash
+    - git pull upstream-starter main --rebase
     - git status
 
   launchpad:update-core:
