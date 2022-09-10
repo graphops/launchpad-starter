@@ -45,9 +45,10 @@ git add .
 git commit -m "feat: Initial clone from launchpad-starter"
 
 # Add the launchpad-core submodule and commit
+task launchpad:update-core
+git add .
+git commit -m 'feat: added launchpad-core submodule'
 ```
-
-The `--recursive` flag on `git clone` tells git to checkout all submodules while cloning. This is important because `launchpad-core` is imported as a submodule. If you forgot to do this, `task launchpad:update-core` should solve it for you.
 
 All work on your infrastructure will take place in this new repo. We recommend carefully version controlling all changes you make to your infrastructure configuration.
 
