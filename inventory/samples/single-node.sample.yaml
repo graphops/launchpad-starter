@@ -2,21 +2,28 @@
 # as both the Kubernetes master and as a Kubernetes worker node
 
 all:
-  hosts: &all
+  vars:
+    hardened_ssh_port: <pick_a_port> &hardened-ssh-port
+  hosts:
     my-first-host: # you can customise the name of your host
       ansible_host: <ip>
-      ansible_ssh_port: 22
-      ansible_user: root
-      hardened_ssh_port: <pick_a_port>
-      main_user: <username>
-      become: true
-      k0s_version: v1.24.2+k0s.0
-      k0s_binary_dest: /usr/local/bin/k0s
-      extra_args: "--enable-worker --no-taints"
+init_group:
+  hosts:
+    my-first-host:
+  vars:
+    ansible_user: root
+    hardened_ssh_port: <pick_a_port>
+    main_user: <username>
+
 
 k0s:
+  vars:
+    ansible_user: <username> &main_user
+    become: true
+    k0s_version: v1.24.4+k0s.0
+    k0s_use_custom_config: true
+    ansible_ssh_port: pick_a_port> &hardened-ssh-port
   children:
     initial_controller:
       hosts:
         control-plane-0:
-  hosts: *all
