@@ -54,18 +54,13 @@ tasks:
         fi
         task --summary $TASK | gum format
 
-  launchpad:pull-upstream-starter:
-    desc: Pull changes from upstream launchpad-starter into current branch
+  launchpad:setup:
+    desc: Setup launchpad-core and install launchpad dependencies after a fresh clone
     cmds:
-    - git remote add upstream-starter https://github.com/graphops/launchpad-starter || true
-    - |
-      if [[ `git status --porcelain --untracked-files=no` ]]; then echo "You have uncommitted changes! Exiting..." && exit 1; fi
-    - git status
-    - gum confirm "Are you sure you want to pull the main branch of launchpad-starter into the current branch?"
-    - git pull upstream-starter main --rebase
-    - git status
+    - task: launchpad:update-core # provides launchpad:deps
+    - task: launchpad:deps
 
-  launchpad:update-core:
+  launchpad:update-core: # deps may not be installed, so only use git and bash
     desc: Update the launchpad-core submodule to the latest version
     cmds:
     - git submodule status
@@ -73,7 +68,7 @@ tasks:
     - git submodule update --init --recursive --remote --depth=1
     - git submodule status
     - git status
-    - echo "Done! Be sure to commit this change now."
+    - echo "Done! Be sure to commit any changes now."
 
   octant:
     desc: Run octant to navigate your cluster in your web browser
