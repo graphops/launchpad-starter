@@ -34,11 +34,17 @@ Follow the [installation instructions](https://taskfile.dev/installation/) for y
 Next, we are going to create the repository that will contain your new infrastructure's configuration. We're going to clone `launchpad-starter`, and then init it as a new git repo to version control your infrastructure configuration moving forward.
 
 ```shell
-git clone --recursive --depth 1 https://github.com/graphops/launchpad-starter my-new-infra # clone the starter into my-new-infra
-cd my-new-infra # move into my-new-infra
-rm -rf .git # clear the existing git configuration 
-git init # init a new git repo
-git commit -m "feat: Initial clone from launchpad-starter" # commit the starter contents
+# Clone the starter into my-new-infra and cd into it
+git clone --depth 1 https://github.com/graphops/launchpad-starter my-new-infra
+cd my-new-infra
+
+# Clear the existing Git repo and initialize a new one
+rm -rf .git
+git init
+git add .
+git commit -m "feat: Initial clone from launchpad-starter"
+
+# Add the launchpad-core submodule and commit
 ```
 
 The `--recursive` flag on `git clone` tells git to checkout all submodules while cloning. This is important because `launchpad-core` is imported as a submodule. If you forgot to do this, `task launchpad:update-core` should solve it for you.
