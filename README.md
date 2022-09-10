@@ -43,23 +43,28 @@ rm -rf .git
 git init
 git add .
 git commit -m "feat: Initial clone from launchpad-starter"
-
-# Add the launchpad-core submodule and commit
-task launchpad:update-core
-git add .
-git commit -m 'feat: added launchpad-core submodule'
 ```
 
 All work on your infrastructure will take place in this new repo. We recommend carefully version controlling all changes you make to your infrastructure configuration.
 
-### 3. Use a task to install all deps
+### 3. Install the launchpad-core submodule and all local dependencies
 
-The starter repo came with a default set of tasks defined in Taskfile.yaml, and imported from `launchpad-core`.
+Next, we need to install the `launchpad-core` submodule, which contains Taskfile definitions, Helm Release templates and other useful things we will use. We also need to install all of the local tooling dependencies (like Helm or Kubectl) that we will need.
 
-Running `task launchpad:deps` will install all required dependencies into your local environment.
+We can easily do both of these things by running the launchpad:setup command.
 
 ```shell
-task launchpad:deps
+task launchpad:setup
+# This will run two other tasks:
+# launchpad:update-core, which will install the launchpad-core submodule
+# launchpad:deps, which will install all the local tooling dependencies
+```
+
+Installing the `launchpad-core` submodule will leave an uncommitted change in our new repo, so let's commit that now.
+
+```shell
+git add .
+git commit -m "feat: added launchpad-core submodule"
 ```
 
 ### 4. Update the configuration with your values
