@@ -41,14 +41,6 @@ init_group:
         type: raidz  #define pool type... | basic (no-raid) | mirror | raidz | raidz2 | raidz3
         state: present
         action: create
-    ansible_user: root
-    hardened_ssh_port: <pick_a_port> &hardened-ssh-port
-    main_user: <username>
-    become: true
-    lb_address: <add_lb_address>
-    k0s_version: v1.24.2+k0s.0
-    k0s_use_custom_config: true
-    k0s_binary_dest: /usr/local/bin/k0s
 
 k0s:
   vars:
