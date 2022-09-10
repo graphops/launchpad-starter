@@ -2,21 +2,45 @@
 # set of control plane nodes and multiple Kubernetes worker nodes
 
 all:
-  hosts: &all
+  vars:
+    hardened_ssh_port: <pick_a_port> &hardened-ssh-port
+  hosts: 
     control-plane-0:
       ansible_host: <ip>
     control-plane-1:
       ansible_host: <ip>
     control-plane-2:
       ansible_host: <ip>
-    worker_0:
+    worker-0:
       ansible_host: <ip>
-    worker_1:
+    worker-1:
       ansible_host: <ip>
-    worker_2:
+    worker-2:
       ansible_host: <ip>
-  vars:
-    ansible_ssh_port: 22
+init_group:
+    hosts: 
+      control-plane-0:
+      control-plane-1:
+      control-plane-2:
+      worker-0:
+      worker-1:
+      worker-2:
+    vars:
+      ansible_user: root
+      hardened_ssh_port: <pick_a_port> &hardened-ssh-port
+      main_user: <username>
+      become: true
+      zfs_create_pools: true
+      zfs_pools:  #defines zpool(s) to manage
+      - name: zpool
+        atime: 'off'
+        compression: 'lz4'  # on | off (default) | lzjb | gzip | gzip-1 | gzip-2 | gzip-3 | gzip-4 | gzip-5 | gzip-6 | gzip-7 | gzip-8 | gzip-9 | lz4 | zle
+        devices:  #define devices to create pool with...can define multiple by | sdb sdc sdd sde sdf | all on one line w/spaces
+          - '<name_of_device>'
+          - '<name_of_device>'
+        type: raidz  #define pool type... | basic (no-raid) | mirror | raidz | raidz2 | raidz3
+        state: present
+        action: create
     ansible_user: root
     hardened_ssh_port: <pick_a_port> &hardened-ssh-port
     main_user: <username>
@@ -27,6 +51,13 @@ all:
     k0s_binary_dest: /usr/local/bin/k0s
 
 k0s:
+  vars:
+    ansible_user: <username> &main_user
+    become: true
+    k0s_version: v1.24.4+k0s.0
+    k0s_use_custom_config: true
+    ansible_ssh_port: pick_a_port> &hardened-ssh-port
+    lb_address: <add_lb_address>
   children:
     initial_controller:
       hosts:
@@ -40,4 +71,5 @@ k0s:
         worker_0:
         worker_1:
         worker_2:
-  hosts: *all
+
+
