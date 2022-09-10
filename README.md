@@ -69,9 +69,7 @@ git commit -m "feat: added launchpad-core submodule"
 
 ### 4. Update the configuration with your values
 
-- .env
-- update inventory.yaml
-- update values.yaml overrides
+Next we need to fill out `inventory/inventory.yaml`. This file contains our host definitions. You can find sample configurations in `inventory/samples`.
 
 ### 5. Bootstrap your hosts with Kubernetes
 

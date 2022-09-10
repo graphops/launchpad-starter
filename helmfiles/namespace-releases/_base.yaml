@@ -1,4 +1,3 @@
 # Base configuration that will be loaded into each set of release definitions
 helmDefaults:
-  kubeContext: {{ requiredEnv "KUBECONTEXT" }}
   recreatePods: true
