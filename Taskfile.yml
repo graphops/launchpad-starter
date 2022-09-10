@@ -38,7 +38,7 @@ tasks:
     - |
       echo "When passing arguments to tasks, remember to preceed them with '--'. Example: task help -- releases:apply"
     - echo
-    - task --list-all
+    - task --list
 
   help:
     desc: "Display help for a task. Usage: help -- <task name>"
