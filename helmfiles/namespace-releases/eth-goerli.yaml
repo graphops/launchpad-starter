@@ -1,0 +1,17 @@
+# Import base configuration
+bases:
+- _base.yaml
+
+# Import YAML template definitions
+{{ readFile "../../launchpad-core/helmfiles/templates/eth-goerli.yaml" }}
+
+releases:
+  - name: erigon-archive-trace-eth-goerli
+    <<: *launchpad-release-template-erigon-eth-goerli
+    values:
+      - ../release-values/{{`{{ .Release.Namespace }}`}}/{{`{{ .Release.Name }}`}}.yaml
+
+  - name: proxyd-eth-goerli
+    <<: *launchpad-release-template-proxyd-eth-goerli
+    values:
+      - ../release-values/{{`{{ .Release.Namespace }}`}}/{{`{{ .Release.Name }}`}}.yaml
