@@ -85,6 +85,15 @@ Next, we can install [K0s](https://k0sproject.io/), our chosen distribution of K
 task hosts:apply-k0s
 ```
 
+We should now have our cluster credentials at `inventory/artifacts/k0s-kubeconfig.yml`. Let's make these our default credentials.
+
+```shell
+# Backup our existing credentials if we have any
+mv ~/.kube/config ~/.kube/config.backup.$(date +%s)
+# Copy our new config into the default location
+cp inventory/artifacts/k0s-kubeconfig.yml ~/.kube/config
+```
+
 ### 6. Install releases into the cluster for base cluster services
 
 Next we need to install key non-Graph components of our stack, including monitoring and logging systems.
