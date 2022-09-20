@@ -18,18 +18,18 @@ all:
     worker-2:
       ansible_host: <ip>
 init_group:
-    hosts: 
-      control-plane-0:
-      control-plane-1:
-      control-plane-2:
-      worker-0:
-      worker-1:
-      worker-2:
-    vars:
-      ansible_user: root
-      hardened_ssh_port: <pick_a_port> &hardened-ssh-port
-      main_user: <username>
-      become: true
+  hosts: 
+    control-plane-0:
+    control-plane-1:
+    control-plane-2:
+    worker-0:
+    worker-1:
+    worker-2:
+  vars:
+    ansible_user: root
+    hardened_ssh_port: <pick_a_port> &hardened-ssh-port
+    main_user: <username>
+    become: true
 
 k0s:
   vars:

@@ -26,6 +26,9 @@ includes:
   launchpad:
     taskfile: launchpad-core/taskfiles/launchpad.yml
     optional: true
+  utils:
+    taskfile: launchpad-core/taskfiles/utils.yml
+    optional: true
 
 # Root Task definitions
 tasks:
