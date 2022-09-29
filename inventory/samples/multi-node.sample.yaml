@@ -3,7 +3,7 @@
 
 all:
   vars:
-    hardened_ssh_port: <pick_a_port> &hardened-ssh-port
+    hardened_ssh_port: &hardened-ssh-port <pick_a_port>
   hosts: 
     control-plane-0:
       ansible_host: <ip>
@@ -27,17 +27,17 @@ init_group:
     worker-2:
   vars:
     ansible_user: root
-    hardened_ssh_port: <pick_a_port> &hardened-ssh-port
-    main_user: <username>
+    hardened_ssh_port: *hardened-ssh-port
+    main_user: &main-user <username>
     become: true
 
 k0s:
   vars:
-    ansible_user: <username> &main_user
+    ansible_user: *main_user
     become: true
     k0s_version: v1.24.4+k0s.0
     k0s_use_custom_config: true
-    ansible_ssh_port: pick_a_port> &hardened-ssh-port
+    ansible_ssh_port: *hardened_ssh_port
     lb_address: <add_lb_address>
   children:
     initial_controller:
