@@ -68,7 +68,7 @@ tasks:
     cmds:
     - git submodule status
     - git submodule add https://github.com/graphops/launchpad-core launchpad-core || true && echo "OK"
-    - git submodule update --init --recursive --remote --depth=1
+    - git submodule update --init --recursive --remote --rebase
     - git submodule status
     - git status
     - echo "Done! Be sure to commit any changes now."
