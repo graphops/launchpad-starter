@@ -6,6 +6,11 @@ bases:
 {{ readFile "../../launchpad-core/helmfiles/templates/eth-mainnet.yaml" }}
 
 releases:
+  - name: nimbus-eth-mainnet
+    <<: *launchpad-release-template-nimbus-eth-mainnet
+    values:
+      - ../release-values/{{`{{ .Release.Namespace }}`}}/{{`{{ .Release.Name }}`}}.yaml
+
   - name: erigon-archive-trace-eth-mainnet
     <<: *launchpad-release-template-erigon-eth-mainnet
     values:

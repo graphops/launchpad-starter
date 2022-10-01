@@ -1,0 +1,17 @@
+# Import base configuration
+bases:
+- _base.yaml
+
+# Import YAML template definitions
+{{ readFile "../../launchpad-core/helmfiles/templates/gnosis-mainnet.yaml" }}
+
+releases:
+  - name: nethermind-archive-trace-gnosis-mainnet
+    <<: *launchpad-release-template-nethermind-gnosis-mainnet
+    values:
+      - ../release-values/{{`{{ .Release.Namespace }}`}}/{{`{{ .Release.Name }}`}}.yaml
+
+  - name: proxyd-gnosis-mainnet
+    <<: *launchpad-release-template-proxyd-gnosis-mainnet
+    values:
+      - ../release-values/{{`{{ .Release.Namespace }}`}}/{{`{{ .Release.Name }}`}}.yaml

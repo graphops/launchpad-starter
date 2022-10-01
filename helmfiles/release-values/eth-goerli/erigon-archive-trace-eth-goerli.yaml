@@ -11,4 +11,4 @@ statefulNode:
     resources:
       requests:
         # -- The amount of disk space to provision for Erigon
-        storage: 2Ti
+        storage: 500Gi

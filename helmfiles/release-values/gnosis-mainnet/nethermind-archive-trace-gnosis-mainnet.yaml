@@ -1,0 +1,8 @@
+nethermind:
+  volumeClaimSpec:
+    # -- The storage class to use when provisioning a persistent volume
+    storageClassName: openebs-hostpath # change me if desired
+    resources:
+      requests:
+        # -- The amount of disk space to provision
+        storage: 3Ti
