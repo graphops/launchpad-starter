@@ -7,6 +7,7 @@ all:
   hosts:
     my-first-host: # you can customise the name of your host
       ansible_host: <ip>
+
 init_group:
   hosts:
     my-first-host:
@@ -21,9 +22,13 @@ k0s:
     ansible_user: *main-user
     become: true
     k0s_version: v1.24.4+k0s.0
-    k0s_use_custom_config: true # TODO may not be required for a single node
+    k0s_use_custom_config: false
     ansible_ssh_port: *hardened-ssh-port
   children:
     initial_controller:
       hosts:
         my-first-host:
+      vars:
+        # --no-taints removes node-role.kubernetes.io/master taint
+        # so that k8s workloads can be provisioned on the controller node
+        extra_args: "--enable-worker --no-taints"
