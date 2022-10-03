@@ -6,12 +6,12 @@ bases:
 {{ readFile "../../launchpad-core/helmfiles/templates/eth-goerli.yaml" }}
 
 releases:
-  - name: nimbus-eth-goerli
+  - name: nimbus-eth-goerli-0
     <<: *launchpad-release-template-nimbus-eth-goerli
     values:
       - ../release-values/{{`{{ .Release.Namespace }}`}}/{{`{{ .Release.Name }}`}}.yaml
 
-  - name: erigon-archive-trace-eth-goerli
+  - name: erigon-archive-trace-eth-goerli-0
     <<: *launchpad-release-template-erigon-eth-goerli
     values:
       - ../release-values/{{`{{ .Release.Namespace }}`}}/{{`{{ .Release.Name }}`}}.yaml

@@ -1,5 +1,5 @@
 nimbus:
-  executionClientUrl: http://erigon-archive-trace-eth-goerli-stateful-node:8551
+  executionClientUrl: http://erigon-archive-trace-eth-goerli-0-stateful-node:8551
   jwt:
     # Generate me with: openssl rand -hex 32
     # Must match EL client jwt

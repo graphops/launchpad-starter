@@ -39,12 +39,12 @@ Next, we're going to clone `launchpad-starter`, and then replace the existing `o
 
 ```shell
 # Clone the starter into my-new-infra and cd into it
-git clone --depth 1 https://github.com/graphops/launchpad-starter my-new-infra
+git clone https://github.com/graphops/launchpad-starter my-new-infra
 cd my-new-infra
 
 # Set your own remote as origin
 git remote remove origin
-git remote add https://github.com/you/your-infra-repo
+git remote add origin git@github.com:you/your-infra.git
 
 # Push to your new repo
 git push origin main

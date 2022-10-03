@@ -6,7 +6,7 @@ bases:
 {{ readFile "../../launchpad-core/helmfiles/templates/gnosis-mainnet.yaml" }}
 
 releases:
-  - name: nethermind-archive-trace-gnosis-mainnet
+  - name: nethermind-archive-trace-gnosis-mainnet-0
     <<: *launchpad-release-template-nethermind-gnosis-mainnet
     values:
       - ../release-values/{{`{{ .Release.Namespace }}`}}/{{`{{ .Release.Name }}`}}.yaml
