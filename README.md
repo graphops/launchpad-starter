@@ -31,18 +31,23 @@ Follow the [installation instructions](https://taskfile.dev/installation/) for y
 
 ### 2. Use this starter for your new infra repo
 
-Next, we are going to create the repository that will contain your new infrastructure's configuration. We're going to clone `launchpad-starter`, and then init it as a new git repo to version control your infrastructure configuration moving forward.
+Next, we are going to create the repository that will contain your new infrastructure's configuration.
+
+First, prepare a new empty repository to hold your infrastructure repo. This could be a new repository on GitHub, GitLab, BitBucket, etc.
+
+Next, we're going to clone `launchpad-starter`, and then replace the existing `origin` remote with your new remote repository. This allows us to retain the commit history of `launchpad-starter`.. A shared commit history will make future rebases against the upstream `launchpad-starter` much easier.
 
 ```shell
 # Clone the starter into my-new-infra and cd into it
 git clone --depth 1 https://github.com/graphops/launchpad-starter my-new-infra
 cd my-new-infra
 
-# Clear the existing Git repo and initialize a new one
-rm -rf .git
-git init
-git add .
-git commit -m "feat: Initial clone from launchpad-starter"
+# Set your own remote as origin
+git remote remove origin
+git remote add https://github.com/you/your-infra-repo
+
+# Push to your new repo
+git push origin main
 ```
 
 All work on your infrastructure will take place in this new repo. We recommend carefully version controlling all changes you make to your infrastructure configuration.

@@ -1,11 +1,13 @@
 # Release values overrides for graph-node
 graphNodeDefaults:
   env:
+    # Database configuration
     PGHOST: pg-graph-node
     PGPORT: 5432
     PGDATABASE: graph
-    ETH_MAINNET_RPC_URL: CHANGE_ME
-    GRAPH_POI_ACCESS_TOKEN: CHANGE_ME_TO_SOMETHING_RANDOM
+    GRAPH_POI_ACCESS_TOKEN: CHANGE_ME_TO_SOMETHING_RANDOM # securely generate using: openssl rand -hex 32
+    # Blockchain node configuration
+    ETH_MAINNET_RPC_URL: http://proxyd-eth-mainnet-proxyd.eth-mainnet:8545
 
   secretEnv:
     PGUSER:
