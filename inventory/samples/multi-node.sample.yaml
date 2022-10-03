@@ -33,11 +33,11 @@ init_group:
 
 k0s:
   vars:
-    ansible_user: *main_user
+    ansible_user: *main-user
     become: true
     k0s_version: v1.24.4+k0s.0
     k0s_use_custom_config: true
-    ansible_ssh_port: *hardened_ssh_port
+    ansible_ssh_port: *hardened-ssh-port
     lb_address: <add_lb_address>
   children:
     initial_controller:
