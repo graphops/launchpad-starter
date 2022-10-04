@@ -1,14 +1,9 @@
 global:
   dnsService: "coredns"
 
-querier:
+ingester:
   persistence:
-    enabled: false # change to true to enable
-    storageClass: openebs-rawfile-localpv
-
-querier:
-  persistence:
-    enabled: false # change to true to enable
+    enabled: true # change to true to enable
     storageClass: openebs-rawfile-localpv
 
 loki:
