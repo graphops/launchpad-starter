@@ -7,7 +7,7 @@ statefulNode:
   # -- [PersistentVolumeClaimSpec](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.23/#persistentvolumeclaimspec-v1-core) for Erigon storage
   volumeClaimSpec:
     # -- The storage class to use when provisioning a persistent volume for Erigon
-    storageClassName: openebs-hostpath # change me if desired
+    storageClassName: openebs-rawfile-localpv # change me if desired
     resources:
       requests:
         # -- The amount of disk space to provision for Erigon
