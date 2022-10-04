@@ -4,17 +4,17 @@ graphNodeDefaults:
     # Graph Node configuration
     IPFS: "https://ipfs.network.thegraph.com"
     # Database configuration
-    PGHOST: pg-graph-node
+    PGHOST: pg-primary-subgraph-data
     PGPORT: 5432
     PGDATABASE: graph
 
   # Database sensitive/secret information
   secretEnv:
     PGUSER:
-      secretName: graph.pg-graph-node.credentials.postgresql.acid.zalan.do
+      secretName: graph.pg-primary-subgraph-data.credentials.postgresql.acid.zalan.do
       key: username
     PGPASSWORD:
-      secretName: graph.pg-graph-node.credentials.postgresql.acid.zalan.do
+      secretName: graph.pg-primary-subgraph-data.credentials.postgresql.acid.zalan.do
       key: password
 
 graphNodeGroups:
