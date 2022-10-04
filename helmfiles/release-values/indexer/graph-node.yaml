@@ -1,14 +1,14 @@
 # Release values overrides for graph-node
 graphNodeDefaults:
   env:
+    # Graph Node configuration
+    IPFS: "https://ipfs.network.thegraph.com"
     # Database configuration
     PGHOST: pg-graph-node
     PGPORT: 5432
     PGDATABASE: graph
-    GRAPH_POI_ACCESS_TOKEN: CHANGE_ME_TO_SOMETHING_RANDOM # securely generate using: openssl rand -hex 32
-    # Blockchain node configuration
-    ETH_MAINNET_RPC_URL: http://proxyd-eth-mainnet-proxyd.eth-mainnet:8545
 
+  # Database sensitive/secret information
   secretEnv:
     PGUSER:
       secretName: graph.pg-graph-node.credentials.postgresql.acid.zalan.do
@@ -16,3 +16,25 @@ graphNodeDefaults:
     PGPASSWORD:
       secretName: graph.pg-graph-node.credentials.postgresql.acid.zalan.do
       key: password
+
+graphNodeGroups:
+  index:
+    replicaCount: 1 # scale me
+  query:
+    replicaCount: 1 # scale me
+
+chains:
+  mainnet:
+    shard: primary
+    provider:
+      - label: eth-mainnet
+        url: http://proxyd-eth-mainnet-proxyd.eth-mainnet:8545
+        features: [archive, traces]
+
+  # Uncomment if you have deployed gnosis-mainnet and want to index Gnosis subgraphs
+  # gnosis:
+  #   shard: primary
+  #   provider:
+  #     - label: gnosis-mainnet
+  #       url: http://proxyd-gnosis-mainnet-proxyd.gnosis-mainnet:8545
+  #       features: [archive, traces]
