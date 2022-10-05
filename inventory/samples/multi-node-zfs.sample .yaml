@@ -30,6 +30,7 @@ init_group:
     hardened_ssh_port: *hardened-ssh-port
     main_user: &main-user <username>
     become: true
+    enable_sshd_config: false # change to true to enable ssh hardening and lock port 22
     zfs_create_pools: true
     zfs_pools:  #defines zpool(s) to manage
     - name: <pick_a_pool_name>
@@ -39,7 +40,6 @@ init_group:
       state: present
       action: create
       compression: <specify_compression> # on | off (default) | lzjb | gzip | gzip-1 | gzip-2 | gzip-3 | gzip-4 | gzip-5 | gzip-6 | gzip-7 | gzip-8 | gzip-9 | lz4 | zle
-
 
 k0s:
   vars:

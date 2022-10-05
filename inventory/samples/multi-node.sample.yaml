@@ -30,7 +30,7 @@ init_group:
     hardened_ssh_port: *hardened-ssh-port
     main_user: &main-user <username>
     become: true
-
+    enable_sshd_config: false # change to true to enable ssh hardening and lock port 22
 
 k0s:
   vars:
