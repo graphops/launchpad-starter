@@ -16,6 +16,7 @@ init_group:
     hardened_ssh_port: *hardened-ssh-port
     main_user: &main-user <username>
     enable_sshd_config: false # change to true to enable ssh hardening and lock port 22
+    enable_lvm_config: true
     lvm_vg: <pick_a_vg_name> # ie. vg1
     lvm_vg_devices: [ <list_vg_devices> ] # ie. [ /dev/vda1, /dev/vda15 ] 
     lvm_lv: <pick_a_lv_name> # ie. storage

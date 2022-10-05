@@ -31,6 +31,7 @@ init_group:
     main_user: &main-user <username>
     become: true
     enable_sshd_config: false # change to true to enable ssh hardening and lock port 22
+    enable_lvm_config: false
     zfs_create_pools: true
     zfs_pools:  #defines zpool(s) to manage
     - name: <pick_a_pool_name>
