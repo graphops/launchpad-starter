@@ -1,0 +1,19 @@
+prometheusSpec:
+  storage:
+    volumeClaimTemplate:
+      spec:
+        storageClassName: openebs-rawfile-localpv
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 50Gi
+        selector: {}
+  volumes: 
+  - name: /datadir
+    hostPath:
+      path: /data
+      type: DirectoryOrCreate
+  # Additional VolumeMounts on the output StatefulSet definition.
+  volumeMounts: 
+  - name: data-dir
+    mountPath: /data

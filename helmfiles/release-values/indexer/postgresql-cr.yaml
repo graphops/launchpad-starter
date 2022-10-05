@@ -4,7 +4,7 @@ resources:
     spec:
       volume:
         size: 500Gi
-        storageClass: openebs-hostpath # change me to your desired storage class
+        storageClass: openebs-rawfile-localpv # change me to your desired storage class
       resources:
         requests:
           cpu: 100m
@@ -16,7 +16,7 @@ resources:
     spec:
       volume:
         size: 500Gi
-        storageClass: openebs-hostpath # change me to your desired storage class
+        storageClass: openebs-rawfile-localpv # change me to your desired storage class
       resources:
         requests:
           cpu: 100m
