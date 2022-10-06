@@ -26,8 +26,8 @@ resources:
         storageClass: openebs-rawfile-localpv # change me to your desired storage class
       resources:
         requests:
-          cpu: 4000m
-          memory: 16Gi
+          cpu: 500m
+          memory: 4Gi
         limits:
           cpu: 4000m
           memory: 16Gi
