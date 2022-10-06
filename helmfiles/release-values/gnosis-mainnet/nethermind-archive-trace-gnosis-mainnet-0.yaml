@@ -6,3 +6,7 @@ nethermind:
       requests:
         # -- The amount of disk space to provision
         storage: 3Ti
+  jwt:
+    # Generate me with: openssl rand -hex 32
+    # Must match CL client jwt
+    fromLiteral: ""
