@@ -17,3 +17,11 @@ prometheusSpec:
   volumeMounts: 
   - name: data-dir
     mountPath: /data
+
+grafana:
+  additionalDataSources:
+    - name: Loki
+      access: proxy
+      type: loki
+      url: https://loki-loki-distributed-gateway
+      version: 1
