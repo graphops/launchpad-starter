@@ -37,7 +37,7 @@ tasks:
     desc: List all available tasks
     silent: true
     cmds:
-    - "task launchpad:version || echo '\nPlease install the launchpad-core submodule by using: task launchpad:update-core\n' && exit 1"
+    - "task launchpad:version || (echo '\nPlease install the launchpad-core submodule by using: task launchpad:update-core\n' && exit 1)"
     - |
       echo "When passing arguments to tasks, remember to preceed them with '--'. Example: task help -- releases:apply"
     - echo
