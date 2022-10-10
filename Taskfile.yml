@@ -37,11 +37,11 @@ tasks:
     desc: List all available tasks
     silent: true
     cmds:
-    - "task launchpad:version || (echo '\nPlease install the launchpad-core submodule by using: task launchpad:update-core\n' && exit 1)"
-    - |
-      echo "When passing arguments to tasks, remember to preceed them with '--'. Example: task help -- releases:apply"
-    - echo
-    - task --list
+      - "task launchpad:version || (echo '\nPlease install the launchpad-core submodule by using: task launchpad:update-core\n' && exit 1)"
+      - |
+        echo "When passing arguments to tasks, remember to preceed them with '--'. Example: task help -- releases:apply"
+      - echo
+      - task --list
 
   help:
     desc: "Display help for a task. Usage: help -- <task name>"
@@ -60,25 +60,30 @@ tasks:
   launchpad:setup:
     desc: Setup launchpad-core and install launchpad dependencies after a fresh clone
     cmds:
-    - task launchpad:update-core # provides launchpad:deps
-    - task launchpad:deps
+      - task launchpad:update-core # provides launchpad:deps
+      - task launchpad:deps
 
   launchpad:update-core: # deps may not be installed, so only use git and bash
     desc: Update the launchpad-core submodule to the latest version
     cmds:
-    - git submodule status
-    - git submodule add https://github.com/graphops/launchpad-core launchpad-core || true && echo "OK"
-    - git submodule update --init --recursive --remote --rebase
-    - git submodule status
-    - git status
-    - echo "Done! Be sure to commit any changes now."
+      - |
+        if [[ `git status --porcelain --untracked-files=no` ]]; then echo "You have uncommitted changes! Please commit or reset before continuing. Exiting..." && exit 1; fi
+      - |
+        set -e
+        echo "Existing launchpad version: " && git submodule status
+        git submodule add https://github.com/graphops/launchpad-core launchpad-core || echo "OK"
+        git submodule update --init --recursive --remote --rebase
+        echo "New launchpad version: " && git submodule status
+        git add launchpad-core
+        git commit -m "feat(launchpad-core): updated to$(git submodule status)" || echo "OK"
+        echo "Done! Be sure to push new commits now."
 
   octant:
     desc: Run octant to navigate your cluster in your web browser
     cmds:
-    - octant {{.CLI_ARGS}}
+      - octant {{.CLI_ARGS}}
 
   k9s:
     desc: Run k9s to navigate your cluster in your terminal
     cmds:
-    - k9s {{.CLI_ARGS}}
+      - k9s {{.CLI_ARGS}}
