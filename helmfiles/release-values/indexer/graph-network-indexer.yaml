@@ -20,13 +20,14 @@ indexerAgent:
     public-indexer-url: "XXX_CHANGEME_XXX"
     index-node-ids: "graph-node-index-0" # TODO this should be removed as a requirement, in the mean time it should be a comma delimited list of index node ids
     collect-receipts-endpoint: "https://gateway.testnet.thegraph.com/collect-receipts"
-    network-subgraph-deployment: "QmPVz18RFwK6hE5rZFWERk23LgrTBz2FCkZzgPSrFxFWN4"
+    network-subgraph-deployment: "XXX_CHANGEME_XXX"
+    dai-contract: "XXX_CHANGEME_XXX"
 
   env: {}
 
   secretEnv:
     INDEXER_AGENT_MNEMONIC:
-      secretName: graph-goerli-operator-mnemonic
+      secretName: graph-operator-mnemonic
       key: mnemonic
     INDEXER_AGENT_POSTGRES_USERNAME:
       secretName: indexer.pg-indexer-metadata.credentials.postgresql.acid.zalan.do
@@ -38,13 +39,14 @@ indexerAgent:
 
 indexerService:
   replicaCount: 1 # scale me
-  config: {}
+  config:
+    client-signer-address: "XXX_CHANGEME_XXX"
 
   env: {}
 
   secretEnv:
     INDEXER_SERVICE_MNEMONIC:
-      secretName: graph-goerli-operator-mnemonic
+      secretName: graph-operator-mnemonic
       key: mnemonic
     INDEXER_SERVICE_POSTGRES_USERNAME:
       secretName: indexer.pg-indexer-metadata.credentials.postgresql.acid.zalan.do
@@ -52,3 +54,10 @@ indexerService:
     INDEXER_SERVICE_POSTGRES_PASSWORD:
       secretName: indexer.pg-indexer-metadata.credentials.postgresql.acid.zalan.do
       key: password
+
+prometheus:
+  serviceMonitors:
+    enabled: true
+
+grafana:
+  dashboards: true

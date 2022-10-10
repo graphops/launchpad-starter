@@ -1,0 +1,37 @@
+image:
+  pullPolicy: Always
+
+config:
+  graphNode:
+    # -- URL to Graph Node Admin API
+    adminApiUrl: http://graph-node-index:8020
+    existingConfigMap:
+      # -- The name of the ConfigMap that contains your Graph Node config.toml
+      configMapName: graph-node-config
+      # -- The name of the data key in the ConfigMap that contains your config.toml
+      configFileKey: config.toml
+  indexer:
+    # -- URL to Indexer Agent Management Server
+    indexerAgentManagementUrl: http://graph-network-indexer-agent:8000
+
+aliases:
+  graphman: graphman --config /graphman-config/config.toml
+  indexer: graph-indexer indexer
+  psql-primary-subgraph-data: >
+    PGPASSWORD=$PRIMARY_SUBGRAPH_DATA_PGPASSWORD psql -w -U $PRIMARY_SUBGRAPH_DATA_PGUSER -d 'host=pg-primary-subgraph-data port=5432 dbname=graph'
+  psql-indexer-metadata: >
+    PGPASSWORD=$INDEXER_METDATA_PGPASSWORD psql -w -U $INDEXER_METADATA_PGUSER -d 'host=pg-indexer-metadata port=5432 dbname=indexer'
+
+secretEnv:
+  PRIMARY_SUBGRAPH_DATA_PGUSER:
+    secretName: graph.pg-primary-subgraph-data.credentials.postgresql.acid.zalan.do
+    key: username
+  PRIMARY_SUBGRAPH_DATA_PGPASSWORD:
+    secretName: graph.pg-primary-subgraph-data.credentials.postgresql.acid.zalan.do
+    key: password
+  INDEXER_METADATA_PGUSER:
+    secretName: indexer.pg-indexer-metadata.credentials.postgresql.acid.zalan.do
+    key: username
+  INDEXER_METDATA_PGPASSWORD:
+    secretName: indexer.pg-indexer-metadata.credentials.postgresql.acid.zalan.do
+    key: password

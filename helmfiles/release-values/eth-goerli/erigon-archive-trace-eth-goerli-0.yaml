@@ -1,8 +1,16 @@
 statefulNode:
+  extraArgs:
+    - --network=goerli
+
   jwt:
     # Generate me with: openssl rand -hex 32
     # Must match CL client jwt
-    fromLiteral: ""
+    fromLiteral: "XXX_CHANGEME_XXX"
+    # Instead specifying the JWT in plain text using fromLiteral, you can also reference an existing Kubernetes Secret
+    # existingSecret:
+    #   name: eth-goerli-jwt
+    #   key: jwt
+
 
   # -- [PersistentVolumeClaimSpec](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.23/#persistentvolumeclaimspec-v1-core) for Erigon storage
   volumeClaimSpec:
@@ -12,3 +20,14 @@ statefulNode:
       requests:
         # -- The amount of disk space to provision for Erigon
         storage: 500Gi
+
+rpcdaemon:
+  enabled: true
+  replicaCount: 1 # scale me
+
+prometheus:
+  serviceMonitors:
+    enabled: true
+
+grafana:
+  dashboards: true

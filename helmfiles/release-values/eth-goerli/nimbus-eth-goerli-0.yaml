@@ -3,7 +3,11 @@ nimbus:
   jwt:
     # Generate me with: openssl rand -hex 32
     # Must match EL client jwt
-    fromLiteral: ""
+    fromLiteral: "XXX_CHANGEME_XXX"
+    # Instead specifying the JWT in plain text using fromLiteral, you can also reference an existing Kubernetes Secret
+    # existingSecret:
+    #   name: eth-goerli-jwt
+    #   key: jwt
 
   # -- [PersistentVolumeClaimSpec](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.23/#persistentvolumeclaimspec-v1-core) for storage
   volumeClaimSpec:
@@ -11,3 +15,10 @@ nimbus:
     resources:
       requests:
         storage: 300Gi
+
+prometheus:
+  serviceMonitors:
+    enabled: true
+
+grafana:
+  dashboards: true

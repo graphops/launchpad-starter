@@ -3,16 +3,16 @@
 ## UNCOMMENT ME
 ## Inject a Kubernetes Secret or SealedSecret (SealedSecret recommended) into the namespace to securely store your operator mnemonic
 # resources:
-#   sealed-secret:
+#   sealed-secret: # Generate a SealedSecret encryptedData key with task utils:seal-secrets
 #     apiVersion: bitnami.com/v1alpha1
 #     kind: SealedSecret
 #     metadata:
-#       name: graph-goerli-operator-mnemonic
+#       name: graph-operator-mnemonic
 #       namespace: indexer
 #     spec:
 #       template:
 #         metadata:
-#           name: graph-goerli-operator-mnemonic
+#           name: graph-operator-mnemonic
 #           namespace: indexer
 #         type: Opaque
 #       encryptedData:

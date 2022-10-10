@@ -16,14 +16,21 @@ releases:
     values:
       - ../release-values/{{`{{ .Release.Namespace }}`}}/{{`{{ .Release.Name }}`}}.yaml
 
-  - name: graph-goerli-operator-mnemonic
+  - name: graph-operator-mnemonic
     <<: *launchpad-release-template-defaults
     chart: graphops/resource-injector
     version: 0.2.0
     values:
       - ../release-values/{{`{{ .Release.Namespace }}`}}/{{`{{ .Release.Name }}`}}.yaml
 
-  - name: graph-network-goerli-indexer
+  - name: graph-network-indexer
     <<: *launchpad-release-template-graph-network-indexer
+    values:
+      - ../release-values/{{`{{ .Release.Namespace }}`}}/{{`{{ .Release.Name }}`}}.yaml
+
+  - name: graph-toolbox
+    <<: *launchpad-release-template-defaults
+    chart: graph-network-indexer-chart-dev/graph-toolbox
+    # version: 4.2.1
     values:
       - ../release-values/{{`{{ .Release.Namespace }}`}}/{{`{{ .Release.Name }}`}}.yaml

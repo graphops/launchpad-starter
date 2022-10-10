@@ -4,6 +4,7 @@ graphNodeDefaults:
   env:
     # Graph Node configuration
     IPFS: "https://ipfs.network.thegraph.com"
+    GRAPH_ALLOW_NON_DETERMINISTIC_FULLTEXT_SEARCH: "true"
     # Database configuration
     PGHOST: pg-primary-subgraph-data
     PGPORT: 5432

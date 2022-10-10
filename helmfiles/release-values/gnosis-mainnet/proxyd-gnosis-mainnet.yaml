@@ -10,3 +10,10 @@ backends:
       - pruned
       - archive
       - archive-trace
+
+prometheus:
+  serviceMonitors:
+    enabled: true
+
+grafana:
+  dashboards: true
