@@ -1,6 +1,6 @@
 statefulNode:
   extraArgs:
-    - --network=goerli
+    - --chain=goerli
 
   jwt:
     # Generate me with: openssl rand -hex 32

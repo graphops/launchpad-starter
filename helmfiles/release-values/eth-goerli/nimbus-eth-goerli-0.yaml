@@ -1,4 +1,7 @@
 nimbus:
+  extraArgs:
+    - --network=goerli
+
   executionClientUrl: http://erigon-archive-trace-eth-goerli-0-stateful-node:8551
   jwt:
     # Generate me with: openssl rand -hex 32
