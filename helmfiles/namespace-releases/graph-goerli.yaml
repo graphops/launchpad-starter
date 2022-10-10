@@ -3,7 +3,7 @@ bases:
 - _base.yaml
 
 # Import YAML template definitions
-{{ readFile "../../launchpad-core/helmfiles/templates/indexer.yaml" }}
+{{ readFile "../../launchpad-core/helmfiles/templates/graph-goerli.yaml" }}
 
 releases:
   - name: postgresql-cr
