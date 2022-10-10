@@ -119,16 +119,16 @@ Next we need to install key non-Graph components of our stack, including monitor
 task releases:apply-base
 ```
 
-### 7. Install Erigon and Proxyd for Ethereum mainnet
+### 7. Install Erigon, Nimbus and Proxyd for Ethereum mainnet
 
 ```shell
 task releases:apply -- eth-mainnet
 ```
 
-### 8. Install the Indexer stack
+### 8. Install the Indexer Stack on the Goerli Protocol Deployment
 
 ```shell
-task releases:apply -- indexer
+task releases:apply -- graph-goerli
 ```
 
 ## Updates
