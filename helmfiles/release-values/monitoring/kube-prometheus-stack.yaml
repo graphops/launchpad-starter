@@ -1,7 +1,44 @@
+prometheus:
+  prometheusSpec:
+    storageSpec:
+      volumeClaimTemplate:
+        spec:
+          storageClassName: openebs-rawfile-localpv
+          accessModes: ["ReadWriteOnce"]
+          resources:
+            requests:
+              storage: 10Gi
+
+alertmanager:
+  alertmanagerSpec:
+    storage:
+      volumeClaimTemplate:
+        spec:
+          storageClassName: openebs-rawfile-localpv
+          accessModes: ["ReadWriteOnce"]
+          resources:
+            requests:
+              storage: 10Gi
+
 grafana:
+  deploymentStrategy:
+    type: Recreate
+  enabled: true
+  persistence:
+    enabled: true
+    type: pvc
+    storageClassName: openebs-rawfile-localpv
+    accessModes:
+    - ReadWriteOnce
+    size: 500Mi
+    finalizers:
+    - kubernetes.io/pvc-protection
+  grafana.ini:
+    paths:
+      data: /var/lib/grafana/data
   additionalDataSources:
     - name: Loki
       access: proxy
       type: loki
-      url: https://loki-loki-distributed-gateway
+      url: http://loki-loki-distributed-gateway
       version: 1
