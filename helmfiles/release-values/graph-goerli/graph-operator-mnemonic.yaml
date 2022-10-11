@@ -8,12 +8,12 @@
 #     kind: SealedSecret
 #     metadata:
 #       name: graph-operator-mnemonic
-#       namespace: indexer
+#       namespace: graph-goerli
 #     spec:
 #       template:
 #         metadata:
 #           name: graph-operator-mnemonic
-#           namespace: indexer
+#           namespace: graph-goerli
 #         type: Opaque
 #       encryptedData:
 #         mnemonic: 'AgAWbW92oWUlLwfbVcFUNTa95jK+moSpjsETDEYKf9V3XarN2AFn5srjDIH3kFBIESw6s24lW+HACmdSaB6ScaxTA7CapzL9EIZocTWgiP3K0MVeTG60RCYN+YszVZ1tJ7ZzjzitcdgXFB6ibb4vLClSlcMtzi8l/yM941Ao3rpXxCC3rIz0QdmXyuH0twlwUoEZNtUW+LfaGEy2wOlqx4tUfOOAaukjc/Jcjx7i5yeucEJ14s8rruke2LtLzNICtzYY9m/CGRHJRh4wcDbjbZbHqFLGlvbD7/7R7MzS6UaiD6MBB/xOYcAo8d1EfIDBIp86kfmsXVpbDGZ0ZMaTn9EOc9JU495Q2vuzwI5xpGkBHaE38mpVv9H+tcJDpBwxhLnc9db3SeJ6xn8sGTuoCFBao08qw2CllJvTEWp/RiO5cUW8bVSVJ3MZZJ85Ju8ca5ZH0G6KErK4qCNFnDSzbqfUOxcVVUsIRDFifEYpHzQck4a2l9ECFTvCsq4U1HpseqTu+QZc4vWejqeU+MRXQvgYn/EOanvG5BHCsNb39Q4uQoh3LQmGePVOiksLmf4l7osV3866AWu/3bxG6pWuyofkOGl7wU5YtzxCGsv/0VDuMFTo5f/59OTWK6UDKaCOznG8NTeq5/6BZoA0whjAd11YeIJk9LhEdEt//kTFEjSCi/SQABuTDLB70NEWi0nAzKWRcjGOZkDDkrBeSQ/7wROpHe55yFmA4QuqK87DBTp2drxeyaTJMHwF0OK9Lc8XTkEmeHYx4O6sB+aDS8OvDQ8kIzsI15ljHJfAESjfdU83bcZdJ9UvuGk7qh2s7zIQ15a7rkO7KlPfklARg91svn+BWOzXkFO93I2SBpbT0f3RXxak+Uo3RLfgrDxoc/pLFHI3ApPQjuoq2BQqj2QebwodJjElbA=='
