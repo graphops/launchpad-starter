@@ -29,8 +29,6 @@ releases:
       - ../release-values/{{`{{ .Release.Namespace }}`}}/{{`{{ .Release.Name }}`}}.yaml
 
   - name: graph-toolbox
-    <<: *launchpad-release-template-defaults
-    chart: graph-network-indexer-chart-dev/graph-toolbox
-    # version: 4.2.1
+    <<: *launchpad-release-template-graph-toolbox
     values:
       - ../release-values/{{`{{ .Release.Namespace }}`}}/{{`{{ .Release.Name }}`}}.yaml
