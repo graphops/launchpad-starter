@@ -35,4 +35,5 @@ k0s:
       vars:
         # --no-taints removes node-role.kubernetes.io/master taint
         # so that k8s workloads can be provisioned on the controller node
-        extra_args: "--enable-worker --no-taints"
+        # konnectivity-server is not required in a one node flat network cluster
+        extra_args: "--enable-worker --no-taints --disable-components konnectivity-server"
