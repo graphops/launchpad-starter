@@ -4,7 +4,7 @@ defaultRules:
     kubeControllerManager: false
     kubeSchedulerAlerting: false
     kubeSchedulerRecording: false
-
+    
 prometheus:
   prometheusSpec:
     storageSpec:
@@ -14,8 +14,8 @@ prometheus:
           accessModes: ["ReadWriteOnce"]
           resources:
             requests:
-              storage: 2Gi
-
+              storage: 10Gi
+              
 alertmanager:
   alertmanagerSpec:
     storage:
@@ -37,7 +37,9 @@ grafana:
     storageClassName: openebs-rawfile-localpv
     accessModes:
     - ReadWriteOnce
-    size: 300Mi
+    size: 500Mi
+    finalizers:
+    - kubernetes.io/pvc-protection
   grafana.ini:
     paths:
       data: /var/lib/grafana/data

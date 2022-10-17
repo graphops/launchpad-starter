@@ -1,19 +1,21 @@
-# Release values overrides for graph-node
+# This is a values.yaml override file for https://github.com/graphops/helm-charts/tree/main/charts/graph-node
+
 graphNodeDefaults:
   env:
     # Graph Node configuration
     IPFS: "https://ipfs.network.thegraph.com"
+    GRAPH_ALLOW_NON_DETERMINISTIC_FULLTEXT_SEARCH: "true"
     # Database configuration
-    PGHOST: pg-primary-subgraph-data
-    PGPORT: 5432
-    PGDATABASE: graph
+    PRIMARY_SUBGRAPH_DATA_PGHOST: pg-primary-subgraph-data
+    PRIMARY_SUBGRAPH_DATA_PGPORT: 5432
+    PRIMARY_SUBGRAPH_DATA_PGDATABASE: graph
 
   # Database sensitive/secret information
   secretEnv:
-    PGUSER:
+    PRIMARY_SUBGRAPH_DATA_PGUSER:
       secretName: graph.pg-primary-subgraph-data.credentials.postgresql.acid.zalan.do
       key: username
-    PGPASSWORD:
+    PRIMARY_SUBGRAPH_DATA_PGPASSWORD:
       secretName: graph.pg-primary-subgraph-data.credentials.postgresql.acid.zalan.do
       key: password
 

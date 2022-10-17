@@ -21,6 +21,12 @@ There are two components to be aware of:
 - An opinionated starter (this repo) to define and manage your stack in a declarative, version controlled manner
 - A workflow to seamlessly inherit new templated release updates, while still supporting a enormous degree of deployment flexibility
 
+## Prerequisites
+
+- At least one host running Ubuntu 22.04 LTS
+- SSH access to that host on your local machine using public key authentication. **Password authentication is not supported**
+- If you're on a Mac, Homebrew must be installed to use `launchpad:deps`
+
 ## Quickstart
 
 ### 1. Install Taskfile
@@ -59,7 +65,9 @@ Next, we need to install the `launchpad-core` submodule, which contains Taskfile
 We can easily do both of these things by running the launchpad:setup command.
 
 ```shell
+# You may need to use sudo for this command
 task launchpad:setup
+
 # This will run two other tasks:
 # launchpad:update-core, which will install the launchpad-core submodule
 # launchpad:deps, which will install all the local tooling dependencies
@@ -93,10 +101,14 @@ task hosts:apply-k0s
 We should now have our cluster credentials at `inventory/artifacts/k0s-kubeconfig.yml`. Let's make these our default credentials.
 
 ```shell
+# Make sure our config directory exists
+mkdir -p ~/.kube
 # Backup our existing credentials if we have any
 mv ~/.kube/config ~/.kube/config.backup.$(date +%s)
 # Copy our new config into the default location
 cp inventory/artifacts/k0s-kubeconfig.yml ~/.kube/config
+# Set secure permissions on the file
+chmod 600 ~/.kube/config
 ```
 
 ### 6. Install releases into the cluster for base cluster services
@@ -107,16 +119,16 @@ Next we need to install key non-Graph components of our stack, including monitor
 task releases:apply-base
 ```
 
-### 7. Install Erigon and Proxyd for Ethereum mainnet
+### 7. Install Erigon, Nimbus and Proxyd for Ethereum mainnet
 
 ```shell
 task releases:apply -- eth-mainnet
 ```
 
-### 8. Install the Indexer stack
+### 8. Install the Indexer Stack on the Goerli Protocol Deployment
 
 ```shell
-task releases:apply -- indexer
+task releases:apply -- graph-goerli
 ```
 
 ## Updates
