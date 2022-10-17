@@ -1,19 +1,49 @@
-prometheusSpec:
-  storage:
-    volumeClaimTemplate:
-      spec:
-        storageClassName: openebs-rawfile-localpv
-        accessModes: ["ReadWriteOnce"]
-        resources:
-          requests:
-            storage: 50Gi
-        selector: {}
-  volumes: 
-  - name: /datadir
-    hostPath:
-      path: /data
-      type: DirectoryOrCreate
-  # Additional VolumeMounts on the output StatefulSet definition.
-  volumeMounts: 
-  - name: data-dir
-    mountPath: /data
+defaultRules:
+  rules:
+    # disabling for embedded k0s processes https://github.com/k0sproject/k0s/issues/611#issuecomment-756655575
+    kubeControllerManager: false
+    kubeSchedulerAlerting: false
+    kubeSchedulerRecording: false
+
+prometheus:
+  prometheusSpec:
+    storageSpec:
+      volumeClaimTemplate:
+        spec:
+          storageClassName: openebs-rawfile-localpv
+          accessModes: ["ReadWriteOnce"]
+          resources:
+            requests:
+              storage: 2Gi
+
+alertmanager:
+  alertmanagerSpec:
+    storage:
+      volumeClaimTemplate:
+        spec:
+          storageClassName: openebs-rawfile-localpv
+          accessModes: ["ReadWriteOnce"]
+          resources:
+            requests:
+              storage: 10Gi
+
+grafana:
+  deploymentStrategy:
+    type: Recreate
+  enabled: true
+  persistence:
+    enabled: true
+    type: pvc
+    storageClassName: openebs-rawfile-localpv
+    accessModes:
+    - ReadWriteOnce
+    size: 300Mi
+  grafana.ini:
+    paths:
+      data: /var/lib/grafana/data
+  additionalDataSources:
+    - name: Loki
+      access: proxy
+      type: loki
+      url: http://loki-loki-distributed-gateway
+      version: 1
