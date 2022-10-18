@@ -1,25 +1,24 @@
-# Example of an inventory for single host that will be configured
-# as both the Kubernetes master and as a Kubernetes worker node
-
+# Example of an inventory for a cluster with one controller node and one worker node 
 all:
   vars:
     hardened_ssh_port: &hardened-ssh-port <pick_a_port>
   hosts:
     my-first-host: # you can customise the name of your host
       ansible_host: <ip>
+    my-second-host:
+      ansible_host: <ip>
+      
 
 init_group:
   hosts:
     my-first-host:
+    my-second-host:
   vars:
     ansible_user: root
     hardened_ssh_port: *hardened-ssh-port
     main_user: &main-user <username>
     enable_sshd_config: false # change to true to enable ssh hardening and lock port 22
-    enable_lvm_config: true
-    lvm_vg: <pick_a_vg_name> # ie. vg1
-    lvm_vg_devices: [ <list_vg_devices> ] # ie. [ /dev/vda1, /dev/vda15 ] 
-    lvm_lv: <pick_a_lv_name> # ie. storage
+    enable_lvm_config: false
 
 k0s:
   vars:
@@ -32,8 +31,13 @@ k0s:
     initial_controller:
       hosts:
         my-first-host:
-      vars:
-        # --no-taints removes node-role.kubernetes.io/master taint
-        # so that k8s workloads can be provisioned on the controller node
-        # konnectivity-server is not required in a one node flat network cluster
-        extra_args: "--enable-worker --no-taints --disable-components konnectivity-server"
+      # vars:
+      #   # --no-taints removes node-role.kubernetes.io/master taint
+      #   # so that k8s workloads can be provisioned on the controller node
+      #   # --enable-worker let's you provision application workloads on the node
+      #   # for better cluster performance do not apply the --enable-worker flag to controller node
+      #   extra_args: "--enable-worker --no-taints"
+    worker:
+      hosts:
+        my_second_host:
+
