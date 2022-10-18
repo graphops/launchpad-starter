@@ -1,3 +1,10 @@
+defaultRules:
+  rules:
+    # disabling for embedded k0s processes https://github.com/k0sproject/k0s/issues/611#issuecomment-756655575
+    kubeControllerManager: false
+    kubeSchedulerAlerting: false
+    kubeSchedulerRecording: false
+    
 prometheus:
   prometheusSpec:
     storageSpec:
