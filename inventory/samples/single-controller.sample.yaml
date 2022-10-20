@@ -24,7 +24,7 @@ k0s:
   vars:
     ansible_user: *main-user
     become: true
-    k0s_version: v1.24.4+k0s.0
+    k0s_version: v1.25.2+k0s.0
     k0s_use_custom_config: false
     ansible_ssh_port: *hardened-ssh-port
   children:
