@@ -18,5 +18,6 @@ releases:
 
   - name: cert-manager-resources
     <<: *launchpad-release-template-resource-injector
+    disableValidationOnInstall: true # For CRDs https://github.com/helmfile/helmfile/blob/main/pkg/state/state.go#L236
     values:
       - ../release-values/{{`{{ .Release.Namespace }}`}}/{{`{{ .Release.Name }}`}}.yaml
