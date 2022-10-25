@@ -1,0 +1,17 @@
+# This is a values.yaml override file for https://github.com/kubernetes/ingress-nginx/tree/main/charts/ingress-nginx
+
+# This is a very basic ingress configuration. Consider using a LoadBalancer controller for your cloud, or a solution like MetalLB.
+controller:
+  # Run on every host
+  kind: DaemonSet
+
+  service:
+    # No existing LoadBalancer controller exists to provision a fresh IP for the Service, so we use ClusterIP instead
+    type: ClusterIP
+
+    # -- List of IP addresses at which the controller services are available
+    ## Ref: https://kubernetes.io/docs/user-guide/services/#external-ips
+    ##
+    # externalIPs: []
+    externalIPs: [] # XXX_CHANGEME_XXX Populate with public IP addresses of hosts that you want to accept inbound traffic
+

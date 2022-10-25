@@ -4,9 +4,13 @@ defaultRules:
     kubeControllerManager: false
     kubeSchedulerAlerting: false
     kubeSchedulerRecording: false
-    
+
 prometheus:
   prometheusSpec:
+    ruleSelectorNilUsesHelmValues: false
+    serviceMonitorSelectorNilUsesHelmValues: false
+    podMonitorSelectorNilUsesHelmValues: false
+    probeSelectorNilUsesHelmValues: false
     storageSpec:
       volumeClaimTemplate:
         spec:
@@ -41,6 +45,13 @@ grafana:
     finalizers:
     - kubernetes.io/pvc-protection
   grafana.ini:
+    auth:
+      disable_login_form: true
+    auth.anonymous:
+      enabled: true
+      org_name: "Main Org."
+      org_role: Admin
+      hide_version: true
     paths:
       data: /var/lib/grafana/data
   additionalDataSources:
@@ -49,3 +60,14 @@ grafana:
       type: loki
       url: http://loki-loki-distributed-gateway
       version: 1
+  sidecar:
+    logLevel: DEBUG
+    dashboards:
+      enabled: true
+      searchNamespace: ALL
+    datasources:
+      enabled: true
+      searchNamespace: ALL
+    notifiers:
+      enabled: true
+      searchNamespace: ALL

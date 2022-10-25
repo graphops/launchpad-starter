@@ -7,7 +7,7 @@ bases:
 
 releases:
   - name: postgresql-cr
-    <<: *launchpad-release-template-postgresql-cr
+    <<: *launchpad-release-template-resource-injector
     values:
       - ../release-values/{{`{{ .Release.Namespace }}`}}/{{`{{ .Release.Name }}`}}.yaml
 
@@ -17,9 +17,7 @@ releases:
       - ../release-values/{{`{{ .Release.Namespace }}`}}/{{`{{ .Release.Name }}`}}.yaml
 
   - name: graph-operator-mnemonic
-    <<: *launchpad-release-template-defaults
-    chart: graphops/resource-injector
-    version: 0.2.0
+    <<: *launchpad-release-template-resource-injector
     values:
       - ../release-values/{{`{{ .Release.Namespace }}`}}/{{`{{ .Release.Name }}`}}.yaml
 

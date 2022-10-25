@@ -10,3 +10,13 @@ releases:
     <<: *launchpad-release-template-ingress-nginx
     values:
       - ../release-values/{{`{{ .Release.Namespace }}`}}/{{`{{ .Release.Name }}`}}.yaml
+
+  - name: cert-manager
+    <<: *launchpad-release-template-cert-manager
+    values:
+      - ../release-values/{{`{{ .Release.Namespace }}`}}/{{`{{ .Release.Name }}`}}.yaml
+
+  - name: cert-manager-resources
+    <<: *launchpad-release-template-resource-injector
+    values:
+      - ../release-values/{{`{{ .Release.Namespace }}`}}/{{`{{ .Release.Name }}`}}.yaml

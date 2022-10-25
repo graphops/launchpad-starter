@@ -1,0 +1,5 @@
+installCRDs: true
+prometheus:
+  servicemonitor:
+    enabled: true
+extraArgs: [--acme-http01-solver-nameservers="8.8.8.8:53,1.1.1.1:53"]
