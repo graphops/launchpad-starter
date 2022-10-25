@@ -23,7 +23,7 @@ There are two components to be aware of:
 
 ## Getting Started
 
-Please see the [Getting Started](https://docs.graphops.xyz/launchpad/getting-started) guide in the [Documentation](https://docs.graphops.xyz/launchpad/intro).
+Please see the [Quick Start](https://docs.graphops.xyz/launchpad/quick-start) guide in the [Documentation](https://docs.graphops.xyz/launchpad/intro).
 
 ## Updates
 
