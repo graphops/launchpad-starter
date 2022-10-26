@@ -22,7 +22,7 @@ indexerAgent:
     collect-receipts-endpoint: "https://gateway.testnet.thegraph.com/collect-receipts"
     network-subgraph-deployment: "XXX_CHANGEME_XXX" # find at https://github.com/graphprotocol/indexer/blob/main/docs/networks.md
     dai-contract: "XXX_CHANGEME_XXX" # find at https://github.com/graphprotocol/indexer/blob/main/docs/networks.md
-    epoch-subgraph-endpoint: "https://thegraph.com/hosted-service/subgraph/juanmardefago/block-oracle-2"
+    epoch-subgraph-endpoint: "XXX_CHANGEME_XXX" # find at https://github.com/graphprotocol/indexer/blob/main/docs/networks.md
 
   env: {}
 
