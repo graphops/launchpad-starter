@@ -27,6 +27,7 @@ graphNodeGroups:
 
 chains:
   mainnet:
+    enabled: false
     shard: primary
     provider:
       - label: eth-mainnet
@@ -35,6 +36,7 @@ chains:
 
   # Uncomment if you have deployed gnosis-mainnet and want to index Gnosis subgraphs
   # gnosis:
+  #   enabled: false
   #   shard: primary
   #   provider:
   #     - label: gnosis-mainnet
