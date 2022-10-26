@@ -18,14 +18,14 @@ init_group:
     enable_sshd_config: false # change to true to enable ssh hardening and lock port 22
     enable_lvm_config: true
     lvm_vg: <pick_a_vg_name> # ie. vg1
-    lvm_vg_devices: [ <list_vg_devices> ] # ie. [ /dev/vda1, /dev/vda15 ] 
+    lvm_vg_devices: [ <list_vg_devices> ] # ie. [ /dev/vda1, /dev/vda15 ]
     lvm_lv: <pick_a_lv_name> # ie. storage
 
 k0s:
   vars:
     ansible_user: *main-user
     become: true
-    k0s_version: v1.25.2+k0s.0
+    k0s_version: v1.24.6+k0s.0
     k0s_use_custom_config: false
     ansible_ssh_port: *hardened-ssh-port
   children:
