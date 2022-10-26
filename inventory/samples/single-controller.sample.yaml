@@ -1,4 +1,4 @@
-# Example of an inventory for a cluster with one controller node and one worker node 
+# Example of an inventory for a cluster with one controller node and one worker node
 all:
   vars:
     hardened_ssh_port: &hardened-ssh-port <pick_a_port>
@@ -7,7 +7,7 @@ all:
       ansible_host: <ip>
     my-second-host:
       ansible_host: <ip>
-      
+
 
 init_group:
   hosts:
@@ -24,7 +24,7 @@ k0s:
   vars:
     ansible_user: *main-user
     become: true
-    k0s_version: v1.25.2+k0s.0
+    k0s_version: v1.24.6+k0s.0
     k0s_use_custom_config: false
     ansible_ssh_port: *hardened-ssh-port
   children:
