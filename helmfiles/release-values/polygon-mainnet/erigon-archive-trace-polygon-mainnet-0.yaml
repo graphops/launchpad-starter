@@ -12,7 +12,7 @@ statefulNode:
     - --externalcl
 
   restoreSnapshot:
-    enable: true
+    enabled: true
     snapshotUrl: https://matic-blockchain-snapshots.s3-accelerate.amazonaws.com/matic-mainnet/erigon-archive-snapshot-2022-12-13.tar.gz
 
   p2pNodePort:
