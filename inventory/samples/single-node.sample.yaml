@@ -5,7 +5,7 @@ all:
   vars:
     hardened_ssh_port: &hardened-ssh-port <pick_a_port>
   hosts:
-    my-first-host: # you can customise the name of your host
+    <hostname_of_my_first_host>: # you can customize the name of your host
       ansible_host: <ip>
 
 init_group:
@@ -33,4 +33,4 @@ k0s:
         # --no-taints removes node-role.kubernetes.io/master taint
         # so that k8s workloads can be provisioned on the controller node
         # konnectivity-server is not required in a one node flat network cluster
-        extra_args: "--enable-worker --no-taints --disable-components konnectivity-server"
+        extra_args: "--enable-worker --no-taints --disable-components konnectivity-server --feature-gates GRPCContainerProbe=true,TopologyAwareHints=true"

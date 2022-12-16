@@ -1,0 +1,22 @@
+# Import base configuration
+bases:
+- _base.yaml
+
+# Import YAML template definitions
+{{ readFile "../../launchpad-core/helmfiles/templates/polygon-mainnet.yaml" }}
+
+releases:
+  - name: heimdall-polygon-mainnet-0
+    <<: *launchpad-release-template-heimdall-polygon-mainnet
+    values:
+      - ../release-values/{{`{{ .Release.Namespace }}`}}/{{`{{ .Release.Name }}`}}.yaml
+
+  - name: erigon-archive-trace-polygon-mainnet-0
+    <<: *launchpad-release-template-erigon-polygon-mainnet
+    values:
+      - ../release-values/{{`{{ .Release.Namespace }}`}}/{{`{{ .Release.Name }}`}}.yaml
+
+  - name: proxyd-polygon-mainnet
+    <<: *launchpad-release-template-proxyd-polygon-mainnet
+    values:
+      - ../release-values/{{`{{ .Release.Namespace }}`}}/{{`{{ .Release.Name }}`}}.yaml
