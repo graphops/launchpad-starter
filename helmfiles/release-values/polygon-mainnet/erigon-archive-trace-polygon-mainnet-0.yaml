@@ -1,7 +1,7 @@
 statefulNode:
   extraArgs:
     - --chain=bor-mainnet
-    - --bor.heimdall=https://heimdall-polygon-mainnet-0-heimdall:1317
+    - --bor.heimdall=http://heimdall-polygon-mainnet-0-heimdall:1317
     - --torrent.download.rate=100mb # Download snapshot files faster
     - --torrent.download.slots=6 # 3 is default
     - --db.read.concurrency=16 # Does limit amount of parallel db reads. Default: equal to GOMAXPROCS (or number of CPU) (default: 10)
