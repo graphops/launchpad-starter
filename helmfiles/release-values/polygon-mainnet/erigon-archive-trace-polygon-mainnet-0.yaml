@@ -10,6 +10,7 @@ statefulNode:
     - --http.api=eth,debug,net,trace
     - --trace.maxtraces=10000
     - --externalcl
+    - --snapshots=true
 
   restoreSnapshot:
     enabled: true
