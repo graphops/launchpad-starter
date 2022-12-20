@@ -10,7 +10,7 @@ statefulNode:
     - --http.api=eth,debug,net,trace
     - --trace.maxtraces=10000
     - --externalcl
-    - --snapshots=true
+    - --snapshots=true # needed for Polygon 
 
   restoreSnapshot:
     enabled: true
@@ -28,3 +28,10 @@ rpcdaemon:
     - --trace.maxtraces=10000
     - --http.corsdomain=*
     - --ws # enable ws
+
+prometheus:
+  serviceMonitors:
+    enabled: true
+
+grafana:
+  dashboards: true
