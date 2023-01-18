@@ -1,0 +1,27 @@
+# Import base configuration
+bases:
+- _base.yaml
+
+# Import YAML template definitions
+{{ readFile "../../launchpad-core/helmfiles/templates/celo-mainnet.yaml" }}
+
+releases:
+  - name: celo-archive-trace-mainnet-0
+    <<: *launchpad-release-template-celo-archive-trace-mainnet
+    values:
+      - ../release-values/{{`{{ .Release.Namespace }}`}}/{{`{{ .Release.Name }}`}}.yaml
+
+  # - name: celo-archive-trace-mainnet-1
+  #   <<: *launchpad-release-template-celo-archive-trace-mainnet
+  #   values:
+  #     - ../release-values/{{`{{ .Release.Namespace }}`}}/{{`{{ .Release.Name }}`}}.yaml
+
+  - name: proxyd-celo-mainnet
+    <<: *launchpad-release-template-proxyd-celo-mainnet
+    values:
+      - ../release-values/{{`{{ .Release.Namespace }}`}}/{{`{{ .Release.Name }}`}}.yaml
+
+  - name: private-ingress-celo-mainnet
+    <<: *launchpad-release-template-resource-injector
+    values:
+      - ../release-values/{{`{{ .Release.Namespace }}`}}/{{`{{ .Release.Name }}`}}.yaml
