@@ -30,4 +30,4 @@ prometheus:
     enabled: true
 
 grafana:
-  dashboards: true
+  dashboards: false # needs fixing
