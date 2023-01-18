@@ -1,0 +1,27 @@
+# Import base configuration
+bases:
+- _base.yaml
+
+# Import YAML template definitions
+{{ readFile "../../launchpad-core/helmfiles/templates/arbitrum-mainnet.yaml" }}
+
+releases:
+  - name: arbitrum-classic-archive-trace-mainnet
+    <<: *launchpad-release-template-arbitrum-classic-mainnet
+    values:
+      - ../release-values/{{`{{ .Release.Namespace }}`}}/{{`{{ .Release.Name }}`}}.yaml
+
+  - name: arbitrum-nitro-archive-trace-mainnet
+    <<: *launchpad-release-template-arbitrum-nitro-mainnet
+    values:
+      - ../release-values/{{`{{ .Release.Namespace }}`}}/{{`{{ .Release.Name }}`}}.yaml
+
+  - name: proxyd-arbitrum-mainnet
+    <<: *launchpad-release-template-proxyd-arbitrum-mainnet
+    values:
+      - ../release-values/{{`{{ .Release.Namespace }}`}}/{{`{{ .Release.Name }}`}}.yaml
+
+  - name: private-ingress-arbitrum-mainnet
+    <<: *launchpad-release-template-resource-injector
+    values:
+      - ../release-values/{{`{{ .Release.Namespace }}`}}/{{`{{ .Release.Name }}`}}.yaml
