@@ -1,4 +1,10 @@
 nitro:
+  extraArgs:
+    - --init.url="https://snapshot.arbitrum.io/mainnet/nitro.tar"
+    - --l1.url=http://your-eth-mainnet-url:8545  ## changeme
+    - --l2.chain-id=42161  # determines Arbitrum network - 42161 mainnet
+    - --node.rpc.classic-redirect=http://arbitrum-classic-archive-trace-mainnet:8547/
+
   resources:
     # We usually recommend not to specify default resources and to leave this as a conscious
     # choice for the user. This also increases chances charts run on environments with little
@@ -12,7 +18,7 @@ nitro:
   # -- [PersistentVolumeClaimSpec](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.23/#persistentvolumeclaimspec-v1-core) for Erigon storage
   volumeClaimSpec:
     # -- The storage class to use when provisioning a persistent volume for Erigon
-    storageClassName: openebs-zfs-localpv-compressed-32k # change me if desired
+    storageClassName: openebs-rawfile-localpv # change me if desired
     resources:
       requests:
         # -- The amount of disk space to provision for Erigon
