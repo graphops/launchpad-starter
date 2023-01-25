@@ -1,0 +1,17 @@
+# Import base configuration
+bases:
+- _base.yaml
+
+# Import YAML template definitions
+{{ readFile "../../launchpad-core/helmfiles/templates/waku-mainnet.yaml" }}
+
+releases:
+  - name: waku-mainnet
+    <<: *launchpad-release-template-waku-mainnet
+    values:
+      - ../release-values/{{`{{ .Release.Namespace }}`}}/{{`{{ .Release.Name }}`}}.yaml
+
+  - name: proxyd-waku-mainnet
+    <<: *launchpad-release-template-proxyd-waku-mainnet
+    values:
+      - ../release-values/{{`{{ .Release.Namespace }}`}}/{{`{{ .Release.Name }}`}}.yaml
