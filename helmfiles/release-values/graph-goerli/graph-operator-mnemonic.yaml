@@ -1,4 +1,4 @@
-# This is a values.yaml override file for https://github.com/graphops/helm-charts/tree/main/charts/resource-injector
+# This is a values.yaml override file for https://github.com/graphops/launchpad-charts/tree/main/charts/resource-injector
 
 ## Inject a Kubernetes Secret or SealedSecret (SealedSecret recommended) into the namespace to securely store your operator mnemonic
 ### NB: ENSURE YOU HAVE A SEPARATE BACKUP OF THIS KEY

@@ -1,4 +1,4 @@
-# This is a values.yaml override file for https://github.com/graphops/helm-charts/tree/main/charts/graph-node
+# This is a values.yaml override file for https://github.com/graphops/launchpad-charts/tree/main/charts/graph-node
 
 graphNodeDefaults:
   env:
