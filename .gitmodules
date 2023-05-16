@@ -1,4 +1,0 @@
-[submodule "launchpad-core"]
-	path = launchpad-core
-	url = https://github.com/graphops/launchpad-core
-	branch = release/v1

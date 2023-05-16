@@ -1,0 +1,115 @@
+version: '3'
+
+vars:
+  HELM_VERSION: '{{.HELM_VERSION | default "3.9.4"}}'
+  HELMFILE_VERSION: '{{.HELMFILE_VERSION | default "0.145.4"}}'
+  KUBECTL_VERSION: '{{.KUBECTL_VERSION | default "$(curl -L -s https://dl.k8s.io/release/stable.txt)"}}' 
+  KUBESEAL_VERSION: '{{.KUBESEAL_VERSION | default "0.18.2"}}'
+  OCTANT_VERSION: '{{.OCTANT_VERSION | default "0.25.1"}}'
+  K9S_VERSION: '{{.K9S_VERSION | default "0.26.3"}}'
+
+# These commands are intended to run on Debian/Ubuntu dist only - contributions to support more dist are welcome! 
+
+tasks:
+  ansible:
+    interactive: true
+    cmds: 
+      - |
+        apt update 
+        apt install --yes software-properties-common
+        apt-add-repository --yes --update ppa:ansible/ansible
+        apt install --yes ansible
+
+  helm:
+    interactive: true
+    cmds:
+      - |
+        cd $(mktemp -d)
+        apt-get install wget
+        wget https://get.helm.sh/helm-v{{.HELM_VERSION}}-linux-amd64.tar.gz
+        tar xvf helm-v{{.HELM_VERSION}}-linux-amd64.tar.gz
+        mv linux-amd64/helm /usr/local/bin
+
+
+  helmfile:
+    interactive: true
+    cmds:
+      - |
+        cd $(mktemp -d)
+        wget https://github.com/helmfile/helmfile/releases/download/v{{.HELMFILE_VERSION}}/helmfile_{{.HELMFILE_VERSION}}_linux_amd64.tar.gz
+        tar xvf helmfile_{{.HELMFILE_VERSION}}_linux_amd64.tar.gz
+        mv helmfile /usr/local/bin
+
+  kubectl:
+    interactive: true
+    cmds:
+      - |
+        cd $(mktemp -d)
+        curl -LO "https://dl.k8s.io/release/{{.KUBECTL_VERSION}}/bin/linux/amd64/kubectl" #todo add support for specific version
+        curl -LO "https://dl.k8s.io/{{.KUBECTL_VERSION}}/bin/linux/amd64/kubectl.sha256" # download the kubectl checksum file
+        echo "$(cat kubectl.sha256)  kubectl" | sha256sum --check # validate checksum against binary
+        if [ "$?" != "0" ]; then
+          exit 1
+        else
+          sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+        fi
+
+  kubeseal:
+    interactive: true
+    cmds:
+      - |
+        cd $(mktemp -d)
+        wget https://github.com/bitnami-labs/sealed-secrets/releases/download/v{{.KUBESEAL_VERSION}}/kubeseal-{{.KUBESEAL_VERSION}}-linux-amd64.tar.gz
+        tar xfz kubeseal-{{.KUBESEAL_VERSION}}-linux-amd64.tar.gz
+        sudo install -m 755 kubeseal /usr/local/bin/kubeseal
+
+  jq:
+    interactive: true
+    cmds:
+      - apt install --yes jq
+
+  octant:
+    interactive: true
+    cmds:
+      - |
+        cd $(mktemp -d)
+        wget https://github.com/vmware-tanzu/octant/releases/download/v{{.OCTANT_VERSION}}/octant_{{.OCTANT_VERSION}}_Linux-64bit.deb
+        dpkg -i octant_{{.OCTANT_VERSION}}_Linux-64bit.deb
+
+  k9s:
+    interactive: true
+    cmds:
+      - |
+        cd $(mktemp -d)
+        wget https://github.com/derailed/k9s/releases/download/v{{.K9S_VERSION}}/k9s_Linux_x86_64.tar.gz
+        tar xfz k9s_Linux_x86_64.tar.gz
+        mv k9s /usr/local/bin
+  
+  gum:
+    interactive: true
+    cmds:
+      - |
+        echo 'deb [trusted=yes] https://repo.charm.sh/apt/ /' | sudo tee /etc/apt/sources.list.d/charm.list
+        sudo apt update && sudo apt install gum
+  
+  helm-git:
+    interactive: true
+    cmds:
+      - |
+        helm plugin list | grep 'helm-git' &> /dev/null
+        if [ $? == 0 ]; then
+          echo "Plugin already exists skipping"
+        else
+          helm plugin install https://github.com/aslafy-z/helm-git || echo "OK"
+        fi
+   
+  helm-diff:
+    interactive: true
+    cmds:
+      - |
+        helm plugin list | grep 'diff' &> /dev/null
+        if [ $? == 0 ]; then
+          echo "Plugin already exists skipping"
+        else
+          helm plugin install https://github.com/databus23/helm-diff || echo "OK"
+        fi

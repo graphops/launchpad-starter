@@ -1,4 +1,0 @@
-analytics:
-  enabled: false
-zfsNode:
-  kubeletDir: /var/lib/k0s/kubelet/

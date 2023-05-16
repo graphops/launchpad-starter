@@ -1,0 +1,43 @@
+version: '3'
+
+tasks:
+  apply:
+    interactive: true
+    desc: "Apply release(s) for a namespace. Usage: releases:apply -- <namespace> [release-name]"
+    cmds:
+      - launchpad-core/taskfiles/scripts/helmfile.sh apply {{.CLI_ARGS}}
+
+  delete:
+    interactive: true
+    desc: "Delete release(s) for a namespace. Usage: releases:delete -- <namespace> [release-name]"
+    cmds:
+      - launchpad-core/taskfiles/scripts/helmfile.sh delete {{.CLI_ARGS}}
+
+  status:
+    interactive: true
+    desc: "View status for release(s). Usage: releases:status -- <namespace> [release-name]"
+    cmds:
+      - launchpad-core/taskfiles/scripts/helmfile.sh status {{.CLI_ARGS}}
+
+  apply-base:
+    interactive: true
+    desc: Apply all namespaces for base cluster services
+    cmds:
+      - task releases:apply -- sealed-secrets
+      - task releases:apply -- storage
+      - task releases:apply -- monitoring
+      - task releases:apply -- ingress
+      - task releases:apply -- postgres-operator
+
+  # Ordering is unsafe...
+  # apply-all:
+  #   cmds:
+  #     - |
+  #       set -e - {{ .CLI_ARGS }}
+
+  #       NS_DIR="./helmfiles/namespace-releases"
+
+  #       for file in $NS_DIR/*.yaml; do
+  #         NS=$(basename $file | cut -f 1 -d '.')
+  #         (set -ex; task releases:apply -- $NS)
+  #       done

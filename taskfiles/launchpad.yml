@@ -1,0 +1,54 @@
+# tasks that relate to launchpad, launchpad-core and repo setup
+version: '3'
+
+includes:
+  deps: ./launchpad_deps_{{OS}}.yml
+
+tasks:
+  version:
+    desc: Display launchpad-core version information
+    silent: true
+    cmds:
+      - |
+        SUBMODULE_STATUS=$(git submodule status)
+        SUBMODULE_STATUS=${SUBMODULE_STATUS:-unknown}
+        LOGO=$(printf " _                        _                     _ \n| | __ _ _   _ _ __   ___| |__  _ __   __ _  __| |\n| |/ _\` | | | | '_ \ / __| '_ \| '_ \ / _\` |/ _\` |\n| | (_| | |_| | | | | (__| | | | |_) | (_| | (_| |\n|_|\__,_|\__,_|_| |_|\___|_| |_| .__/ \__,_|\__,_|\n                               |_|                ")
+        TEXT=$(printf "$LOGO\n\nhttps://github.com/graphops/launchpad-starter\nhttps://github.com/graphops/launchpad-core\n\nlaunchpad-core submodule status:\n$SUBMODULE_STATUS")
+        gum style --border-foreground "#48a795" --border double --align center --margin "1" --padding "1 2" "$TEXT"
+
+  pull-upstream-starter:
+    desc: Pull and rebase changes from upstream launchpad-starter into current local branch
+    cmds:
+      - git remote add upstream-starter https://github.com/graphops/launchpad-starter || true && echo "OK"
+      - |
+        if [[ `git status --porcelain --untracked-files=no` ]]; then echo "You have uncommitted changes! Please commit or reset before continuing. Exiting..." && exit 1; fi
+      - git status
+      - |
+        TEXT="
+        Are you sure you want to pull and rebase the main branch of launchpad-starter into the current local branch?
+        
+        You will need to manually resolve conflicts between remote changes and local changes,
+        and your history will be divergent with remote branches. You will need to force push over them.
+        
+        Learn more about rebasing: https://git-scm.com/book/en/v2/Git-Branching-Rebasing
+        Learn more about git pull --rebase: https://gitolite.com/git-pull--rebase
+        "
+        gum confirm "$TEXT"
+      - git pull upstream-starter main --rebase
+      - git status
+
+  deps:
+    desc: 'Installs all external dependencies using package manager'
+    cmds:
+      - task: deps:ansible
+      - task: deps:helm
+      - task: deps:helmfile
+      - task: deps:gum
+      - task: deps:kubectl
+      - task: deps:kubeseal
+      - task: deps:jq
+      - task: deps:gum
+      - task: deps:octant
+      - task: deps:k9s
+      - task: deps:helm-git
+      - task: deps:helm-diff
