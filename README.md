@@ -15,7 +15,7 @@ There are two components to be aware of:
 
 ## Features
 
-- Actively maintained by [GraphOps](https://graphops.xyz) [and contributors](https://github.com/graphops/helm-charts/graphs/contributors)
+- Actively maintained by [GraphOps](https://graphops.xyz) [and contributors](https://github.com/graphops/launchpad-charts/graphs/contributors)
 - Deploy Kubernetes (K0s) onto any existing set of SSH-capable hosts you have
 - Predefined release definitions for monitoring, logging and other cluster functions, as well as for the complete Graph Indexer Stack
 - An opinionated starter (this repo) to define and manage your stack in a declarative, version controlled manner
@@ -54,4 +54,4 @@ We welcome and appreciate your contributions! Please see the [Contributor Guide]
 ## See also
 
 - [`graphops/launchpad-core`](https://github.com/graphops/launchpad-core)
-- [`graphops/helm-charts`](https://github.com/graphops/helm-charts)
+- [`graphops/launchpad-charts`](https://github.com/graphops/launchpad-charts)

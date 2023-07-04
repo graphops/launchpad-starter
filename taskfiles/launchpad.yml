@@ -6,11 +6,11 @@ includes:
 
 tasks:
   version:
+    # TODO: re-evaluate concept of version
     desc: Display launchpad-core version information
     silent: true
     cmds:
       - |
-        SUBMODULE_STATUS=$(git submodule status)
         SUBMODULE_STATUS=${SUBMODULE_STATUS:-unknown}
         LOGO=$(printf " _                        _                     _ \n| | __ _ _   _ _ __   ___| |__  _ __   __ _  __| |\n| |/ _\` | | | | '_ \ / __| '_ \| '_ \ / _\` |/ _\` |\n| | (_| | |_| | | | | (__| | | | |_) | (_| | (_| |\n|_|\__,_|\__,_|_| |_|\___|_| |_| .__/ \__,_|\__,_|\n                               |_|                ")
         TEXT=$(printf "$LOGO\n\nhttps://github.com/graphops/launchpad-starter\nhttps://github.com/graphops/launchpad-core\n\nlaunchpad-core submodule status:\n$SUBMODULE_STATUS")

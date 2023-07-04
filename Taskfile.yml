@@ -15,19 +15,19 @@ includes:
     taskfile: Taskfile.ext.yaml
     optional: true
   hosts:
-    taskfile: launchpad-core/taskfiles/hosts.yml
+    taskfile: taskfiles/hosts.yml
     optional: true
   releases:
-    taskfile: launchpad-core/taskfiles/releases.yml
+    taskfile: taskfiles/releases.yml
     optional: true
   indexer:
-    taskfile: launchpad-core/taskfiles/indexer.yml
+    taskfile: taskfiles/indexer.yml
     optional: true
   launchpad:
-    taskfile: launchpad-core/taskfiles/launchpad.yml
+    taskfile: taskfiles/launchpad.yml
     optional: true
   utils:
-    taskfile: launchpad-core/taskfiles/utils.yml
+    taskfile: taskfiles/utils.yml
     optional: true
 
 # Root Task definitions
@@ -37,7 +37,6 @@ tasks:
     desc: List all available tasks
     silent: true
     cmds:
-    - "task launchpad:version || (echo '\nPlease install the launchpad-core submodule by using: task launchpad:update-core\n' && exit 1)"
     - |
       echo "When passing arguments to tasks, remember to preceed them with '--'. Example: task help -- releases:apply"
     - echo
@@ -58,20 +57,9 @@ tasks:
         task --summary $TASK | gum format
 
   launchpad:setup:
-    desc: Setup launchpad-core and install launchpad dependencies after a fresh clone
+    desc: Install launchpad dependencies after a fresh clone
     cmds:
-    - task launchpad:update-core # provides launchpad:deps
     - task launchpad:deps
-
-  launchpad:update-core: # deps may not be installed, so only use git and bash
-    desc: Update the launchpad-core submodule to the latest version
-    cmds:
-    - git submodule status
-    - git submodule add https://github.com/graphops/launchpad-core launchpad-core || true && echo "OK"
-    - git submodule update --init --recursive --remote --rebase
-    - git submodule status
-    - git status
-    - echo "Done! Be sure to commit any changes now."
 
   octant:
     desc: Run octant to navigate your cluster in your web browser

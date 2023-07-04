@@ -1,33 +1,29 @@
 version: '3'
 
 tasks:
-  apply:
-    interactive: true
-    desc: "Apply release(s) for a namespace. Usage: releases:apply -- <namespace> [release-name]"
-    cmds:
-      - launchpad-core/taskfiles/scripts/helmfile.sh apply {{.CLI_ARGS}}
-
-  delete:
-    interactive: true
-    desc: "Delete release(s) for a namespace. Usage: releases:delete -- <namespace> [release-name]"
-    cmds:
-      - launchpad-core/taskfiles/scripts/helmfile.sh delete {{.CLI_ARGS}}
-
   status:
     interactive: true
-    desc: "View status for release(s). Usage: releases:status -- <namespace> [release-name]"
+    desc: "View status for release(s). Usage: releases:status"
     cmds:
-      - launchpad-core/taskfiles/scripts/helmfile.sh status {{.CLI_ARGS}}
+      - taskfiles/scripts/helmfile.sh status {{.CLI_ARGS}}
+
+  apply:
+    interactive: true
+    desc: "Apply current helmfile state. Usage: releases:apply"
+    cmds:
+      - taskfiles/scripts/helmfile.sh apply {{.CLI_ARGS}}
 
   apply-base:
     interactive: true
-    desc: Apply all namespaces for base cluster services
+    desc: Apply current helmfile state filtered by all base layer services
     cmds:
-      - task releases:apply -- sealed-secrets
-      - task releases:apply -- storage
-      - task releases:apply -- monitoring
-      - task releases:apply -- ingress
-      - task releases:apply -- postgres-operator
+      - task releases:apply -- launchpad.graphops.xyz/layer=base
+
+  delete:
+    interactive: true
+    desc: "Delete release(s) for a cluster namespace. Usage: releases:delete -- <namespace> [release-name]"
+    cmds:
+      - taskfiles/scripts/helmfile.sh delete {{.CLI_ARGS}}
 
   # Ordering is unsafe...
   # apply-all:

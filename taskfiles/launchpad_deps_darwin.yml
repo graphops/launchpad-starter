@@ -28,13 +28,6 @@ tasks:
           exit 1
         fi
 
-  ansible:
-    interactive: true
-    cmds:
-      - brew install ansible
-    deps:
-      - brew-status
-
   helm:
     interactive: true
     cmds:

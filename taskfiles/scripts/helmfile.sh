@@ -1,32 +1,34 @@
 #!/bin/bash
 
 COMMAND=$1; shift
-NAMESPACE=$1; shift
-RELEASE=$1; shift
+
+SELECTOR=""
+
+if [[ -n "$1" ]] && [[ ! "$1" =~ '=' ]]; then
+    SELECTOR+="--selector=namespace=$1"; shift
+fi
+
+if [[ -n "$1" ]] && [[ ! "$1" =~ '=' ]]; then
+    SELECTOR+=",name=$1"; shift
+fi
+
+if [[ -z "$SELECTOR" ]] && [[ "$#" -gt 0 ]]; then
+    SELECTOR+="--selector="
+fi
+
+IFS="," SELECTOR+=$(echo "$*")
 
 set -e
-
-NS_DIR="$(pwd)/helmfiles/namespace-releases"
-NAMESPACE_FILE_PATH="${NS_DIR}/${NAMESPACE}.yaml"
 
 usage(){
     echo "Invalid usage."
     echo
     echo "Arguments:"
     echo "<command> The Helmfile command to use. $([ -z "$COMMAND" ] && echo ❌ Not specified || echo ✅ Current value is $COMMAND)."
-    echo "<namespace> Must be a valid namespace releases file. $([ -z "$NAMESPACE" ] && echo ❌ Not specified || echo Current value is $NAMESPACE. $([ ! -f "$NAMESPACE_FILE_PATH" ] && echo ❌ Expected file $NAMESPACE_FILE_PATH does not exist || echo Expected file ✅ $NAMESPACE_FILE_PATH exists))."
+    echo "<namespace> Must be a valid namespace. $([ -z "$NAMESPACE" ] && echo ❌ Not specified || echo Current value is $NAMESPACE. $([ ! -f "$NAMESPACE_FILE_PATH" ] && echo ❌ Expected file $NAMESPACE_FILE_PATH does not exist || echo Expected file ✅ $NAMESPACE_FILE_PATH exists))."
     echo "[release-name] Optionally select a single release"
     exit 1
 }
-
-if [ -z "$NAMESPACE" ] || [ ! -f "$NAMESPACE_FILE_PATH" ]; then
-    usage
-fi
-
-SELECTOR=""
-if [ ! -z "$RELEASE" ]; then
-    SELECTOR="--selector=name=$RELEASE"
-fi
 
 DEBUG_LOGS=""
 if [ "$LAUNCHPAD_VERBOSE_LOGS" = "true" ]; then

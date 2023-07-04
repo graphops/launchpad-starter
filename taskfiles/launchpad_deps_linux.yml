@@ -11,15 +11,6 @@ vars:
 # These commands are intended to run on Debian/Ubuntu dist only - contributions to support more dist are welcome! 
 
 tasks:
-  ansible:
-    interactive: true
-    cmds: 
-      - |
-        apt update 
-        apt install --yes software-properties-common
-        apt-add-repository --yes --update ppa:ansible/ansible
-        apt install --yes ansible
-
   helm:
     interactive: true
     cmds:
