@@ -1,12 +1,12 @@
 version: '3'
 
 vars:
-  HELM_VERSION: '{{.HELM_VERSION | default "3.9.4"}}'
-  HELMFILE_VERSION: '{{.HELMFILE_VERSION | default "0.145.4"}}'
+  HELM_VERSION: '{{.HELM_VERSION | default "3.12.2"}}'
+  HELMFILE_VERSION: '{{.HELMFILE_VERSION | default "0.155.1"}}'
   KUBECTL_VERSION: '{{.KUBECTL_VERSION | default "$(curl -L -s https://dl.k8s.io/release/stable.txt)"}}' 
-  KUBESEAL_VERSION: '{{.KUBESEAL_VERSION | default "0.18.2"}}'
+  KUBESEAL_VERSION: '{{.KUBESEAL_VERSION | default "0.23.0"}}'
   OCTANT_VERSION: '{{.OCTANT_VERSION | default "0.25.1"}}'
-  K9S_VERSION: '{{.K9S_VERSION | default "0.26.3"}}'
+  K9S_VERSION: '{{.K9S_VERSION | default "0.27.4"}}'
 
 # These commands are intended to run on Debian/Ubuntu dist only - contributions to support more dist are welcome! 
 

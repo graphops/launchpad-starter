@@ -14,9 +14,6 @@ includes:
   ext:
     taskfile: Taskfile.ext.yaml
     optional: true
-  hosts:
-    taskfile: taskfiles/hosts.yml
-    optional: true
   releases:
     taskfile: taskfiles/releases.yml
     optional: true

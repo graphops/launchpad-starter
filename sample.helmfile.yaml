@@ -1,0 +1,57 @@
+helmDefaults: &helmDefaults
+  recreatePods: false
+
+{{/*
+The helmfiles section allows to include remote helmfiles, and is where one can easilly add launchpad-namespaces.
+The launchpad-namespaces have a common values interface that can be used like the following example
+
+  - path: git::https://github.com/graphops/launchpad-namespaces.git@storage/helmfile.yaml?ref=stable/latest #?ref= -- you can use the ?ref= to pin a version or choose a branch
+    selectorsInherited: true # this passes CLI helmfile selectors to the remote helmfiles and is required by launchpad-starter in all launchpad namespaces
+    values: # launchpad-namespaces have a values interface
+    - helmDefaults: # with this key you can pass helmDefaults to the sub-helmfile if desired
+        <<: *helmDefaults
+      labels: # adds labels to all resources deployed by this launchpad-namespace
+      annotations: # adds annotations to all resources deployed by this launchpad-namespace
+      targetNamespace: "storage" # to specify the cluster-namespace in which to deploy
+      features: # features allows to tweak which releases are included in the launchpad-namespaces that offer that option
+        - zfs
+        - rawfile
+      flavor: "goerli" # some launchpad-namespaces allow to choose from different flavors (i.e. mainnet or goerli), which changes the set of default values
+      # Optionally, each release in the launchpad namespace accepts values that will be merged
+      openebs: # the name of the key must match the release name
+        values: # values passed can be a dictionary or a list of diciotnaries
+          - exampleKey: "exampleValue"
+        mergeValues: true # optionally you can disable value merging with launchpad's defaults and choose to replace them instead.
+*/}}
+
+helmfiles:
+  {{/* Storage Namespace, for OpenEBS deployment */}}
+  - path: git::https://github.com/graphops/launchpad-namespaces.git@storage/helmfile.yaml?ref=stable/latest
+    selectorsInherited: true
+    values:
+    - helmDefaults:
+        <<: *helmDefaults
+      features:
+        - rawfile
+
+  {{/* Monitoring Namespace, includes grafana, prometheus, loki and promtail */}}
+  - path: git::https://github.com/graphops/launchpad-namespaces.git@monitoring/helmfile.yaml?ref=stable/latest
+    selectorsInherited: true
+
+  {{/* Ingress Namespace, for ingress-nginx and cert-manager */}}
+  - path: git::https://github.com/graphops/launchpad-namespaces.git@ingress/helmfile.yaml?ref=stable/latest
+    selectorsInherited: true
+
+  {{/* Postgres-operator */}}
+  - path: git::https://github.com/graphops/launchpad-namespaces.git@postgres-operator/helmfile.yaml?ref=stable/latest
+    selectorsInherited: true
+
+  {{/* ethereum, for deploying an etherium archive node. Accepts mainnet and goerli as flavors. */}}
+  - path: git::https://github.com/graphops/launchpad-namespaces.git@ethereum/helmfile.yaml?ref=stable/latest
+    selectorsInherited: true
+    values:
+    - helmDefaults:
+        <<: *helmDefaults
+      flavor: "goerli"
+
+releases:
