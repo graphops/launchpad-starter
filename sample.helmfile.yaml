@@ -50,6 +50,13 @@ helmfiles:
   - path: git::https://github.com/graphops/launchpad-namespaces.git@postgres-operator/helmfile.yaml?ref=postgres-operator-stable/latest
     selectorsInherited: true
 
+  {{/* Sealed-secrets */}}
+  - path: git::https://github.com/graphops/launchpad-namespaces.git@sealed-secrets/helmfile.yaml?ref=sealed-secrets-stable/latest
+    selectorsInherited: true
+    values:
+    - helmDefaults:
+        <<: *helmDefaults
+
   {{/* ethereum, for deploying an etherium archive node. Accepts mainnet and goerli as flavors. */}}
   - path: git::https://github.com/graphops/launchpad-namespaces.git@ethereum/helmfile.yaml?ref=ethereum-stable/latest
     selectorsInherited: true
@@ -57,5 +64,19 @@ helmfiles:
       - helmDefaults:
           <<: *helmDefaults
         flavor: "goerli"
+        erigon:
+          values:
+            statefulNode:
+              jwt:
+                existingSecret:
+                  name: jwt
+                  key: jwt
+        nimbus:
+          values:
+            nimbus:
+              jwt:
+                existingSecret:
+                  name: jwt
+                  key: jwt
 
 releases:
