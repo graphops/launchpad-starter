@@ -42,6 +42,13 @@ tasks:
     deps:
       - brew-status
 
+  kustomize:
+    interactive: true
+    cmds:
+      - brew install kustomize
+    deps:
+      - brew-status
+
   kubectl:
     interactive: true
     cmds:

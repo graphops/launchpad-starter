@@ -3,6 +3,7 @@ version: '3'
 vars:
   HELM_VERSION: '{{.HELM_VERSION | default "3.12.2"}}'
   HELMFILE_VERSION: '{{.HELMFILE_VERSION | default "0.155.1"}}'
+  KUSTOMIZE_VERSION: '{{.KUSTOMIZE_VERSION | default "5.1.1"}}'
   KUBECTL_VERSION: '{{.KUBECTL_VERSION | default "$(curl -L -s https://dl.k8s.io/release/stable.txt)"}}' 
   KUBESEAL_VERSION: '{{.KUBESEAL_VERSION | default "0.23.0"}}'
   OCTANT_VERSION: '{{.OCTANT_VERSION | default "0.25.1"}}'
@@ -30,6 +31,15 @@ tasks:
         wget https://github.com/helmfile/helmfile/releases/download/v{{.HELMFILE_VERSION}}/helmfile_{{.HELMFILE_VERSION}}_linux_amd64.tar.gz
         tar xvf helmfile_{{.HELMFILE_VERSION}}_linux_amd64.tar.gz
         mv helmfile /usr/local/bin
+
+  kustomize:
+    interactive: true
+    cmds:
+      - |
+        cd $(mktemp -d)
+        wget https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv{{.KUSTOMIZE_VERSION}}/kustomize_v{{.KUSTOMIZE_VERSION}}_linux_amd64.tar.gz
+        tar xvf kustomize_v{{.KUSTOMIZE_VERSION}}_linux_amd64.tar.gz
+        mv kustomize /usr/local/bin
 
   kubectl:
     interactive: true

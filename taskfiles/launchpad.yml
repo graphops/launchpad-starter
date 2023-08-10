@@ -42,6 +42,7 @@ tasks:
     cmds:
       - task: deps:helm
       - task: deps:helmfile
+      - task: deps:kustomize
       - task: deps:gum
       - task: deps:kubectl
       - task: deps:kubeseal
