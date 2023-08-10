@@ -15,7 +15,7 @@ tasks:
 
   apply-base:
     interactive: true
-    desc: Apply current helmfile state filtered by all base layer services
+    desc: "Apply current helmfile state filtered by all base layer services"
     cmds:
       - task releases:apply -- launchpad.graphops.xyz/layer=base
 
@@ -24,6 +24,12 @@ tasks:
     desc: "Delete release(s) for a cluster namespace. Usage: releases:delete -- <namespace> [release-name]"
     cmds:
       - taskfiles/scripts/helmfile.sh delete {{.CLI_ARGS}}
+
+  list:
+    interactive: true
+    desc: "List release(s) present in the helmfile. Usage: releases:list"
+    cmds:
+      - taskfiles/scripts/helmfile.sh list {{.CLI_ARGS}}
 
   # Ordering is unsafe...
   # apply-all:
