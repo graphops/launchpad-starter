@@ -1,0 +1,8 @@
+# tasks that let you interact with the indexer for operational requirements
+version: '3'
+
+tasks:
+  seal-secrets:
+    desc: "Util to encrypt secret values and create in cluster only k8s secrets"
+    cmds:
+      - taskfiles/scripts/seal-secret-value.sh {{.CLI_ARGS}}

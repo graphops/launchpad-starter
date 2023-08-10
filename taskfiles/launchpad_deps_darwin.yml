@@ -1,0 +1,106 @@
+version: '3'
+
+env:
+  PATH: "{{.PWD}}/bin:{{.PATH}}"
+
+tasks:
+  brew-status:
+    interactive: true
+    silent: true
+    cmds: 
+      - |
+        if which brew ; then
+          exit 0
+        else
+          echo -e "Brew is a prerequisite of this task. Please refer to https://brew.sh/ for details"
+          exit 1
+        fi
+
+  helm-status:
+    interactive: true
+    silent: true
+    cmds: 
+      - |
+        if which helm; then
+          exit 0
+        else
+          echo -e "Helm is a prerequisite of this task. Please install Helm. See Help."
+          exit 1
+        fi
+
+  helm:
+    interactive: true
+    cmds:
+      - brew install helm
+    deps:
+      - brew-status
+
+  helmfile:
+    interactive: true
+    cmds:
+      - brew install helmfile
+    deps:
+      - brew-status
+
+  kustomize:
+    interactive: true
+    cmds:
+      - brew install kustomize
+    deps:
+      - brew-status
+
+  kubectl:
+    interactive: true
+    cmds:
+      - brew install kubectl
+    deps:
+      - brew-status
+
+  kubeseal:
+    interactive: true
+    cmds:
+      - brew install kubeseal
+    deps:
+      - brew-status
+
+  jq:
+    interactive: true
+    cmds:
+      - brew install jq
+    deps:
+      - brew-status
+
+  octant:
+    interactive: true
+    cmds:
+      - brew install octant
+    deps:
+      - brew-status
+
+  k9s:
+    interactive: true
+    cmds:
+      - brew install k9s
+    deps:
+      - brew-status
+  
+  gum:
+    interactive: true
+    cmds:
+      - brew install gum
+    deps:
+      - brew-status
+
+  helm-git:
+    interactive: true
+    cmds:
+      - helm plugin install https://github.com/aslafy-z/helm-git || echo "OK"
+    deps:
+      - helm-status
+  
+  helm-diff:
+    interactive: true
+    cmds:
+      - helm plugin install https://github.com/databus23/helm-diff || echo "OK"
+    deps:
+      - helm-status

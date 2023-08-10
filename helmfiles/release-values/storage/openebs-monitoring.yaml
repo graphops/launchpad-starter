@@ -1,4 +1,0 @@
-kube-prometheus-stack:
-  install: false
-node-problem-detector:
-  install: false

@@ -1,0 +1,45 @@
+version: '3'
+
+tasks:
+  status:
+    interactive: true
+    desc: "View status for release(s). Usage: releases:status"
+    cmds:
+      - taskfiles/scripts/helmfile.sh status {{.CLI_ARGS}}
+
+  apply:
+    interactive: true
+    desc: "Apply current helmfile state. Usage: releases:apply"
+    cmds:
+      - taskfiles/scripts/helmfile.sh apply {{.CLI_ARGS}}
+
+  apply-base:
+    interactive: true
+    desc: "Apply current helmfile state filtered by all base layer services"
+    cmds:
+      - task releases:apply -- launchpad.graphops.xyz/layer=base
+
+  delete:
+    interactive: true
+    desc: "Delete release(s) for a cluster namespace. Usage: releases:delete -- <namespace> [release-name]"
+    cmds:
+      - taskfiles/scripts/helmfile.sh delete {{.CLI_ARGS}}
+
+  list:
+    interactive: true
+    desc: "List release(s) present in the helmfile. Usage: releases:list"
+    cmds:
+      - taskfiles/scripts/helmfile.sh list {{.CLI_ARGS}}
+
+  # Ordering is unsafe...
+  # apply-all:
+  #   cmds:
+  #     - |
+  #       set -e - {{ .CLI_ARGS }}
+
+  #       NS_DIR="./helmfiles/namespace-releases"
+
+  #       for file in $NS_DIR/*.yaml; do
+  #         NS=$(basename $file | cut -f 1 -d '.')
+  #         (set -ex; task releases:apply -- $NS)
+  #       done
