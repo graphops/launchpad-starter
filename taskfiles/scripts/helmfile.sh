@@ -45,4 +45,8 @@ Make sure you have backup copies of all your secrets. Are you sure you want to c
 fi
 
 set -x
-helmfile $DEBUG_LOGS --interactive -f "$NAMESPACE_FILE_PATH" --skip-diff-on-install $SELECTOR $COMMAND "$@"
+if [ "$COMMAND" = "apply" ]; then
+    helmfile $DEBUG_LOGS --interactive -f "$NAMESPACE_FILE_PATH" --skip-diff-on-install $SELECTOR $COMMAND "$@"
+else
+    helmfile $DEBUG_LOGS --interactive -f "$NAMESPACE_FILE_PATH" $SELECTOR $COMMAND "$@"
+fi
