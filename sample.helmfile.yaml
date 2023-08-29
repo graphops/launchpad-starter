@@ -57,7 +57,7 @@ helmfiles:
     - helmDefaults:
         <<: *helmDefaults
 
-  {{/* ethereum, for deploying an etherium archive node. Accepts mainnet and goerli as flavors. */}}
+  {{/* Ethereum, for deploying an Ethereum archive node. Accepts "mainnet" and "goerli" as flavors. */}}
   - path: git::https://github.com/graphops/launchpad-namespaces.git@ethereum/helmfile.yaml?ref=ethereum-stable/latest
     selectorsInherited: true
     values:
