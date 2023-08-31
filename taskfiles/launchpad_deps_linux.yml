@@ -17,7 +17,7 @@ tasks:
     cmds:
       - |
         cd $(mktemp -d)
-        apt-get install wget
+        apt install wget
         wget https://get.helm.sh/helm-v{{.HELM_VERSION}}-linux-amd64.tar.gz
         tar xvf helm-v{{.HELM_VERSION}}-linux-amd64.tar.gz
         mv linux-amd64/helm /usr/local/bin
@@ -91,7 +91,7 @@ tasks:
     cmds:
       - |
         echo 'deb [trusted=yes] https://repo.charm.sh/apt/ /' | sudo tee /etc/apt/sources.list.d/charm.list
-        sudo apt update && sudo apt install gum
+        apt update && apt install gum
 
   helm-git:
     interactive: true
