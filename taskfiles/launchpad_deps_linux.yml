@@ -17,7 +17,7 @@ tasks:
     cmds:
       - |
         cd $(mktemp -d)
-        apt install wget
+        apt-get update && apt-get install wget
         wget https://get.helm.sh/helm-v{{.HELM_VERSION}}-linux-amd64.tar.gz
         tar xvf helm-v{{.HELM_VERSION}}-linux-amd64.tar.gz
         mv linux-amd64/helm /usr/local/bin
@@ -52,7 +52,7 @@ tasks:
         if [ "$?" != "0" ]; then
           exit 1
         else
-          sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+          install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
         fi
 
   kubeseal:
@@ -67,7 +67,7 @@ tasks:
   jq:
     interactive: true
     cmds:
-      - apt install --yes jq
+      - apt-get update && apt-get install --yes jq
 
   octant:
     interactive: true
@@ -82,8 +82,8 @@ tasks:
     cmds:
       - |
         cd $(mktemp -d)
-        wget https://github.com/derailed/k9s/releases/download/v{{.K9S_VERSION}}/k9s_Linux_x86_64.tar.gz
-        tar xfz k9s_Linux_x86_64.tar.gz
+        wget https://github.com/derailed/k9s/releases/download/v{{.K9S_VERSION}}/k9s_Linux_amd64.tar.gz
+        tar xfz k9s_Linux_amd64.tar.gz
         mv k9s /usr/local/bin
   
   gum:
@@ -91,7 +91,7 @@ tasks:
     cmds:
       - |
         echo 'deb [trusted=yes] https://repo.charm.sh/apt/ /' | sudo tee /etc/apt/sources.list.d/charm.list
-        apt update && apt install gum
+        apt-get update && apt-get install gum
 
   helm-git:
     interactive: true
@@ -108,8 +108,8 @@ tasks:
     cmds:
       - |
         helm plugin list | grep 'diff' &> /dev/null
-        if [ $? == 0 ]; then
+        if helm plugin list 2>/dev/null | grep -q 'diff'; then
           echo "Plugin already exists skipping"
         else
-          helm plugin install https://github.com/databus23/helm-diff || echo "OK"
+          helm plugin install https://github.com/databus23/helm-diff || (echo "Error installing helm-git" && exit 1)
         fi
