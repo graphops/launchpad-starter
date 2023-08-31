@@ -92,16 +92,15 @@ tasks:
       - |
         echo 'deb [trusted=yes] https://repo.charm.sh/apt/ /' | sudo tee /etc/apt/sources.list.d/charm.list
         sudo apt update && sudo apt install gum
-  
+
   helm-git:
     interactive: true
     cmds:
       - |
-        helm plugin list | grep 'helm-git' &> /dev/null
-        if [ $? == 0 ]; then
-          echo "Plugin already exists skipping"
+        if helm plugin list 2>/dev/null | grep -q 'helm-git'; then
+          echo "Plugin helm-git already exists, skipping"
         else
-          helm plugin install https://github.com/aslafy-z/helm-git || echo "OK"
+          helm plugin install https://github.com/aslafy-z/helm-git || (echo "Error installing helm-git" && exit 1)
         fi
    
   helm-diff:
