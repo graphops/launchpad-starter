@@ -16,7 +16,7 @@ if [[ -z "$SELECTOR" ]] && [[ "$#" -gt 0 ]]; then
     SELECTOR+="--selector="
 fi
 
-IFS="," SELECTOR+=$(echo "$*")
+IFS="" SELECTOR+=$(echo "$*")
 
 set -e
 
