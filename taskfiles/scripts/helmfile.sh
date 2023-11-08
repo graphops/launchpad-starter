@@ -46,7 +46,7 @@ fi
 
 set -x
 if [ "$COMMAND" = "apply" ]; then
-    helmfile $DEBUG_LOGS --interactive -f "$NAMESPACE_FILE_PATH" --skip-diff-on-install $SELECTOR $COMMAND "$@"
+    helmfile $DEBUG_LOGS --interactive -f "$NAMESPACE_FILE_PATH" $SELECTOR $COMMAND --skip-diff-on-install "$@"
 else
     helmfile $DEBUG_LOGS --interactive -f "$NAMESPACE_FILE_PATH" $SELECTOR $COMMAND "$@"
 fi
