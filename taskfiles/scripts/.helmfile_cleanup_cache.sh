@@ -3,7 +3,7 @@
 set -eu
 
 # File to store the last execution timestamp
-TIMESTAMP_FILE="$HOME/.last_helmfile_cleanup"
+TIMESTAMP_FILE="$(pwd)/.last_helmfile_cleanup"
 
 # Function to run helmfile cache cleanup
 run_cleanup() {
