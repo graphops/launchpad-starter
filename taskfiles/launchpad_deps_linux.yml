@@ -90,8 +90,11 @@ tasks:
     interactive: true
     cmds:
       - |
+        if ! command -v sudo &>/dev/null; then
+          apt-get update && apt-get install sudo -y
+        fi
         echo 'deb [trusted=yes] https://repo.charm.sh/apt/ /' | sudo tee /etc/apt/sources.list.d/charm.list
-        apt-get update && apt-get install gum
+        sudo apt-get update && sudo apt-get install gum -y
 
   helm-git:
     interactive: true
