@@ -70,13 +70,6 @@ tasks:
     deps:
       - brew-status
 
-  octant:
-    interactive: true
-    cmds:
-      - brew install octant
-    deps:
-      - brew-status
-
   k9s:
     interactive: true
     cmds:

@@ -48,7 +48,6 @@ tasks:
       - task: deps:kubeseal
       - task: deps:jq
       - task: deps:gum
-      - task: deps:octant
       - task: deps:k9s
       - task: deps:helm-git
       - task: deps:helm-diff

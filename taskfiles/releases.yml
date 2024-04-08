@@ -32,16 +32,3 @@ tasks:
     desc: "List release(s) present in the helmfile. Usage: releases:list"
     cmds:
       - taskfiles/scripts/helmfile.sh list {{.CLI_ARGS}}
-
-  # Ordering is unsafe...
-  # apply-all:
-  #   cmds:
-  #     - |
-  #       set -e - {{ .CLI_ARGS }}
-
-  #       NS_DIR="./helmfiles/namespace-releases"
-
-  #       for file in $NS_DIR/*.yaml; do
-  #         NS=$(basename $file | cut -f 1 -d '.')
-  #         (set -ex; task releases:apply -- $NS)
-  #       done
