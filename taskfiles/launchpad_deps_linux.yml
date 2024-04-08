@@ -1,13 +1,12 @@
 version: '3'
 
 vars:
-  HELM_VERSION: '{{.HELM_VERSION | default "3.12.2"}}'
-  HELMFILE_VERSION: '{{.HELMFILE_VERSION | default "0.155.1"}}'
-  KUSTOMIZE_VERSION: '{{.KUSTOMIZE_VERSION | default "5.1.1"}}'
+  HELM_VERSION: '{{.HELM_VERSION | default "3.14.0"}}'
+  HELMFILE_VERSION: '{{.HELMFILE_VERSION | default "0.163.1"}}'
+  KUSTOMIZE_VERSION: '{{.KUSTOMIZE_VERSION | default "5.3.0"}}'
   KUBECTL_VERSION: '{{.KUBECTL_VERSION | default "$(curl -L -s https://dl.k8s.io/release/stable.txt)"}}' 
-  KUBESEAL_VERSION: '{{.KUBESEAL_VERSION | default "0.23.0"}}'
-  OCTANT_VERSION: '{{.OCTANT_VERSION | default "0.25.1"}}'
-  K9S_VERSION: '{{.K9S_VERSION | default "0.27.4"}}'
+  KUBESEAL_VERSION: '{{.KUBESEAL_VERSION | default "0.26.1"}}'
+  K9S_VERSION: '{{.K9S_VERSION | default "0.32.4"}}'
 
 # These commands are intended to run on Debian/Ubuntu dist only - contributions to support more dist are welcome! 
 
@@ -69,14 +68,6 @@ tasks:
     cmds:
       - apt-get update && apt-get install --yes jq
 
-  octant:
-    interactive: true
-    cmds:
-      - |
-        cd $(mktemp -d)
-        wget https://github.com/vmware-tanzu/octant/releases/download/v{{.OCTANT_VERSION}}/octant_{{.OCTANT_VERSION}}_Linux-64bit.deb
-        dpkg -i octant_{{.OCTANT_VERSION}}_Linux-64bit.deb
-
   k9s:
     interactive: true
     cmds:
@@ -90,8 +81,11 @@ tasks:
     interactive: true
     cmds:
       - |
+        if ! command -v sudo &>/dev/null; then
+          apt-get update && apt-get install sudo -y
+        fi
         echo 'deb [trusted=yes] https://repo.charm.sh/apt/ /' | sudo tee /etc/apt/sources.list.d/charm.list
-        apt-get update && apt-get install gum
+        sudo apt-get update && sudo apt-get install gum -y
 
   helm-git:
     interactive: true
@@ -107,7 +101,6 @@ tasks:
     interactive: true
     cmds:
       - |
-        helm plugin list | grep 'diff' &> /dev/null
         if helm plugin list 2>/dev/null | grep -q 'diff'; then
           echo "Plugin already exists skipping"
         else

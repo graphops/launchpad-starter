@@ -58,11 +58,6 @@ tasks:
     cmds:
     - task launchpad:deps
 
-  octant:
-    desc: Run octant to navigate your cluster in your web browser
-    cmds:
-    - octant {{.CLI_ARGS}}
-
   k9s:
     desc: Run k9s to navigate your cluster in your terminal
     cmds:
