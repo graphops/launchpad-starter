@@ -82,7 +82,7 @@ tasks:
     cmds:
       - |
         echo 'deb [trusted=yes] https://repo.charm.sh/apt/ /' | sudo tee /etc/apt/sources.list.d/charm.list
-        apt-get update && apt-get install gum
+        apt-get update && apt-get install gum -y
 
   helm-git:
     interactive: true
