@@ -1,0 +1,15 @@
+environments:
+  {{ .Environment.Name }}:
+    values:
+      - helmDefaults:
+          recreatePods: false
+          # todo add comment around kubecontext func
+          # kubeContext: <your-kubernetes-context>
+      - kubeVersion: "v1.27.8"
+
+---
+
+helmDefaults:
+{{ .Values.helmDefaults | toYaml | indent 2 }}
+
+kubeVersion: {{ .Values.kubeVersion }}

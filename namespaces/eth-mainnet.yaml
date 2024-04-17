@@ -1,0 +1,29 @@
+bases:
+  - ../helmfile.common.yaml
+
+---
+
+helmDefaults: &helmDefaults
+{{ .Values.helmDefaults | toYaml | indent 2 }}
+
+helmfiles:
+  - path: git::https://github.com/graphops/launchpad-namespaces.git@ethereum/helmfile.yaml?ref=ethereum-stable/latest
+    selectorsInherited: true
+    values:
+    - helmDefaults:
+        <<: *helmDefaults
+    - scaling:
+        deployments: 4
+        p2pStartPort: 31100
+      flavor: mainnet
+      # erigon:
+      #   values:
+      #     your custom values goes here
+      
+      # nimbus:
+      #   values:
+      #     your custom values goes here
+
+      # proxyd:
+      #   values:
+      #     your custom values goes here
