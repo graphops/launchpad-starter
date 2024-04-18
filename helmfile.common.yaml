@@ -3,7 +3,7 @@ environments:
     values:
       - helmDefaults:
           recreatePods: false
-          # todo add comment around kubecontext func
+          # kube context to be used by default for releases in the environment
           # kubeContext: <your-kubernetes-context>
       - kubeVersion: "v1.27.8"
 

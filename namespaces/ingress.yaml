@@ -15,4 +15,4 @@ helmfiles:
     - kubeVersion: {{ .Values.kubeVersion }}
       # ingress-nginx:
       #   values:
-      #     your custom values goes here
+      #     your custom values go here

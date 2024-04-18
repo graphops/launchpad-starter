@@ -18,7 +18,7 @@ helmfiles:
       flavor: sepolia
       # erigon:
       #   values:
-      #     your custom values goes here
+      #     your custom values go here
       
       # nimbus:
       #   values:

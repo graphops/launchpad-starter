@@ -18,12 +18,12 @@ helmfiles:
       flavor: mainnet
       # erigon:
       #   values:
-      #     your custom values goes here
+      #     your custom values go here
       
       # nimbus:
       #   values:
-      #     your custom values goes here
+      #     your custom values go here
 
       # proxyd:
       #   values:
-      #     your custom values goes here
+      #     your custom values go here

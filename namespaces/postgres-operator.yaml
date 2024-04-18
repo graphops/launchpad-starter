@@ -12,8 +12,6 @@ helmfiles:
     values:
     - helmDefaults:
         <<: *helmDefaults
-      resourceLabels:
-        graphops.xyz/environment: production
       # postgres-operator:
       #   values:
-      #     your custom config go here
+      #     your custom values go here

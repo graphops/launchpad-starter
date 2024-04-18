@@ -13,4 +13,4 @@ helmfiles:
     - helmDefaults:
         <<: *helmDefaults
       targetNamespace: "storage"
-      # your custom config goes here
+      # your custom values go here

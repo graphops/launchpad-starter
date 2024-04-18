@@ -1,5 +1,5 @@
 bases:
-  - ../../helmfile.common.yaml
+  - ../helmfile.common.yaml
 
 ---
 
@@ -19,13 +19,13 @@ helmfiles:
         features: [ metrics, logs]
         #  kube-prometheus-stack:
         #   values:
-        #     your custom values goes here
+        #     your custom values go here
 
         # loki:
         #   values:
-        #     your custom values goes here
+        #     your custom values go here
 
         
         # promtail:
         #   values:
-        #     your custom values goes here
+        #     your custom values go here
