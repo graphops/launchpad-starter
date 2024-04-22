@@ -1,0 +1,35 @@
+bases:
+  - ../helmfile.common.yaml
+
+---
+
+helmDefaults: &helmDefaults
+{{ .Values.helmDefaults | toYaml | indent 2 }}
+
+helmfiles:
+  - path: git::https://github.com/graphops/launchpad-namespaces.git@graph/helmfile.yaml?ref=graph-canary/latest
+    selectorsInherited: true
+    values:
+    - helmDefaults:
+        <<: *helmDefaults
+      flavor: "sepolia"
+      targetNamespace: "graph-arbitrum-sepolia"
+      # graph-node:
+      #   values:
+      #     your custom values go here
+      
+      # graph-network-indexer::
+      #   values:
+      #     your custom values go here
+
+      # graph-operator-mnemonic:
+      #   values:
+      #     your custom values go here
+
+      # graph-database:
+      #   values:
+      #     your custom values go here
+
+      # subgraph-radio:
+      #   values:
+      #     your custom values go here
