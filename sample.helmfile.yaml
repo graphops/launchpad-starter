@@ -17,3 +17,5 @@ helmfiles:
   - path: namespaces/monitoring.yaml
   - path: namespaces/eth-sepolia.yaml
   - path: namespaces/eth-mainnet.yaml
+  - path: namespaces/arbitrum-one.yaml
+  - path: namespaces/graph-arbitrum-sepolia.yaml
