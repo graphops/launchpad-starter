@@ -1,0 +1,17 @@
+bases:
+  - ../helmfile.common.yaml
+
+---
+
+helmDefaults: &helmDefaults
+{{ .Values.helmDefaults | toYaml | indent 2 }}
+
+helmfiles:
+  - path: git::https://github.com/graphops/launchpad-namespaces.git@postgres-operator/helmfile.yaml?ref=postgres-operator-stable/latest
+    selectorsInherited: true
+    values:
+    - helmDefaults:
+        <<: *helmDefaults
+      # postgres-operator:
+      #   values:
+      #     your custom values go here

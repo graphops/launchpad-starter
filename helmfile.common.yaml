@@ -1,0 +1,15 @@
+environments:
+  {{ .Environment.Name }}:
+    values:
+      - helmDefaults:
+          recreatePods: false
+          # kube context to be used by default for releases in the environment
+          # kubeContext: <your-kubernetes-context>
+      - kubeVersion: "v1.27.8"
+
+---
+
+helmDefaults:
+{{ .Values.helmDefaults | toYaml | indent 2 }}
+
+kubeVersion: {{ .Values.kubeVersion }}

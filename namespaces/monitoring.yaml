@@ -1,0 +1,31 @@
+bases:
+  - ../helmfile.common.yaml
+
+---
+
+helmDefaults: &helmDefaults
+{{ .Values.helmDefaults | toYaml | indent 2 }}
+
+repositories:
+- name: bitnami
+  url: https://charts.bitnami.com/bitnami
+
+helmfiles:
+  - path: git::https://github.com/graphops/launchpad-namespaces.git@monitoring/helmfile.yaml?ref=monitoring-stable/latest
+    selectorsInherited: true
+    values:
+      - helmDefaults:  
+        <<: *helmDefaults
+        features: [ metrics, logs]
+        #  kube-prometheus-stack:
+        #   values:
+        #     your custom values go here
+
+        # loki:
+        #   values:
+        #     your custom values go here
+
+        
+        # promtail:
+        #   values:
+        #     your custom values go here
