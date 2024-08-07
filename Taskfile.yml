@@ -9,22 +9,18 @@ version: '3'
 # For all Tasks, source in these environment variables
 dotenv: ['.env']
 
-# Import Taskfiles from launchpad-core
+# Import Taskfiles from launchpad-taskfiles
 includes:
-  ext:
-    taskfile: Taskfile.ext.yaml
-    optional: true
   releases:
-    taskfile: taskfiles/releases.yml
-    optional: true
+    taskfile: https://raw.githubusercontent.com/graphops/launchpad-taskfiles/stable/taskfiles/releases.yml
   indexer:
-    taskfile: taskfiles/indexer.yml
-    optional: true
+    taskfile: https://raw.githubusercontent.com/graphops/launchpad-taskfiles/stable/taskfiles/indexer.yml
   launchpad:
-    taskfile: taskfiles/launchpad.yml
-    optional: true
+    taskfile: https://raw.githubusercontent.com/graphops/launchpad-taskfiles/stable/taskfiles/launchpad.yml
   utils:
-    taskfile: taskfiles/utils.yml
+    taskfile: https://raw.githubusercontent.com/graphops/launchpad-taskfiles/stable/taskfiles/utils.yml
+  ext: # Optionally define your own Tasks here
+    taskfile: Taskfile.ext.yaml
     optional: true
 
 # Root Task definitions
@@ -34,10 +30,10 @@ tasks:
     desc: List all available tasks
     silent: true
     cmds:
-    - |
-      echo "When passing arguments to tasks, remember to preceed them with '--'. Example: task help -- releases:apply"
-    - echo
-    - task --list
+      - |
+        echo "When passing arguments to tasks, remember to preceed them with '--'. Example: task help -- releases:apply"
+      - echo
+      - task --list
 
   help:
     desc: "Display help for a task. Usage: help -- <task name>"
@@ -51,14 +47,4 @@ tasks:
           echo "To see all available commands, run: task"
           exit 1
         fi
-        task --summary $TASK | gum format
-
-  launchpad:setup:
-    desc: Install launchpad dependencies after a fresh clone
-    cmds:
-    - task launchpad:deps
-
-  k9s:
-    desc: Run k9s to navigate your cluster in your terminal
-    cmds:
-    - k9s {{.CLI_ARGS}}
+        task --summary $TASK

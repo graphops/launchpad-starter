@@ -1,13 +1,7 @@
-# yaml-language-server: $schema=file:///home/cjw.graphops/code/graphops/upstream/launchpad-namespaces-upd/schema.json
+# Copy this file to helmfile.yaml and customise it for your needs
 
 bases:
   - ./helmfile.common.yaml
-
-repositories:
-- name: strimzi
-  url: https://strimzi.io/charts/
-- name: graphops
-  url: https://graphops.github.io/launchpad-charts
 
 helmfiles:
   - path: namespaces/storage.yaml
