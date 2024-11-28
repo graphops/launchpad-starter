@@ -5,6 +5,8 @@ environments:
           recreatePods: false
           # kube context to be used by default for releases in the environment
           # kubeContext: <your-kubernetes-context>
+          diffArgs:
+            - "--context 5"
       - kubeVersion: "v1.27.8"
 
 ---
