@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
 ## NB: Probably don't edit me
 ## To make pulling upstream launchpad-starter changes seamless, it's recommended
 ## to add custom Tasks to a Taskfile.ext.yaml to prevent merge conflicts
